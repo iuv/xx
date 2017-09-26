@@ -6,7 +6,7 @@ then
   wget https://raw.githubusercontent.com/iuv/xx/master/xx.py -O /usr/local/bin/xx.py
 elif [ $1 == 'update' ]
 then
-  wget https://raw.githubusercontent.com/iuv/xx/master/xx.py -O /usr/local/bin/xx
+  wget https://raw.githubusercontent.com/iuv/xx/master/xx -O /usr/local/bin/xx
   chmod 775 /usr/local/bin/xx
   wget https://raw.githubusercontent.com/iuv/xx/master/xx.py -O /usr/local/bin/xx.py
 else
