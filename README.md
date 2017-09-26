@@ -11,7 +11,8 @@ shell 简化命令，常用命令精简
 ```shell
 xx dl [dockername]
 ```
-查询容器输出日志，`dockername` 支持模糊搜索
+查询容器输出日志，`dockername` 支持模糊搜索  
+
 2. 简化进入docker bash 命令，使用  
 ```shell
 xx de [dockername]
