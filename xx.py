@@ -72,7 +72,7 @@ a1 = sys.argv[1]
 a2 = None
 a3 = None
 if(len(sys.argv) == 3):
-	a3 = sys.argv[2]
+	a2 = sys.argv[2]
 if(len(sys.argv) == 4):
 	a3 = sys.argv[3]
 if(str(a1).startswith("d")):
