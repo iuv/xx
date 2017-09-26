@@ -3,12 +3,12 @@ if [ $1 == 'install' ]
 then
   mv xx /usr/local/bin/xx
   chmod 775 /usr/local/bin/xx
-  wget https://raw.githubusercontent.com/iuv/xx/master/xx.py /usr/local/bin/xx.py
+  wget https://raw.githubusercontent.com/iuv/xx/master/xx.py -O /usr/local/bin/xx.py
 elif [ $1 == 'update' ]
 then
-  wget https://raw.githubusercontent.com/iuv/xx/master/xx.py /usr/local/bin/xx
+  wget https://raw.githubusercontent.com/iuv/xx/master/xx.py -O /usr/local/bin/xx
   chmod 775 /usr/local/bin/xx
-  wget https://raw.githubusercontent.com/iuv/xx/master/xx.py /usr/local/bin/xx.py
+  wget https://raw.githubusercontent.com/iuv/xx/master/xx.py -O /usr/local/bin/xx.py
 else
-python $1 $2 $3
+python /usr/local/bin/xx.py /usr/local/bin/xx.py /usr/local/bin/xx.py $1 $2 $3
 fi
