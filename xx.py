@@ -37,16 +37,18 @@ def findDocker(name=" "):
 # lines 显示log行数，默认10
 def dockerLog(name = " ",lines = 10):
 	dockername = findDocker(name)
-	print("查看%s日志：" % dockername)
-	os.system("docker logs --tail 10 -f %s" % dockername)
+        if dockername != "":
+            print("查看%s日志：" % dockername)
+            os.system("docker logs --tail 10 -f %s" % dockername)
 	return
 
 #进入docker bash
 # name 容器名称，支持模糊
 def dockerExec(name = " "):
 	dockername = findDocker(name)
-	print("登入 %s bash：" % dockername)
-	os.system("docker exec -it  %s bash" % dockername)
+        if dockername != "":
+            print("登入 %s bash：" % dockername)
+            os.system("docker exec -it  %s bash" % dockername)
 	return
 def helps( version ):
         print """
