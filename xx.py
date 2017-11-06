@@ -36,10 +36,12 @@ def findDocker(name=" "):
 # name 容器名称，支持模糊
 # lines 显示log行数，默认10
 def dockerLog(name = " ",lines = 10):
+	if lines is None:
+	    lines = 10
 	dockername = findDocker(name)
         if dockername != "":
             print("查看%s日志：" % dockername)
-            os.system("docker logs --tail 10 -f %s" % dockername)
+            os.system("docker logs --tail %s -f %s" % (lines,dockername))
 	return
 
 #进入docker bash
@@ -56,8 +58,8 @@ def helps( version ):
         了解更多请访问 https://github.com/iuv/xx
         docker 相关操作
           1.简化查询docker 命令，使用
-            xx dl [dockername]
-            查询容器输出日志，dockername 支持模糊搜索
+            xx dl [dockername] [lines]
+            查询容器输出日志，dockername 支持模糊搜索, lines 显示最后X行，默认10行
           2.简化进入docker bash 命令，使用
             xx de [dockername]
             登入容器bash，dockername 支持模糊搜索
@@ -67,13 +69,14 @@ def versions( version ):
     print("xx v%s" % version);
 
 #主方法执行
-version = "0.1" # 版本号
+version = "0.2" # 版本号
 a1 = sys.argv[1]
 a2 = None
 a3 = None
 if(len(sys.argv) == 3):
 	a2 = sys.argv[2]
 if(len(sys.argv) == 4):
+	a2 = sys.argv[2]
 	a3 = sys.argv[3]
 if(str(a1).startswith("d")):
 	docker(a1,a2,a3)
