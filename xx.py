@@ -59,7 +59,7 @@ def helps( version ):
         docker 相关操作
           1.简化查询docker 命令，使用
             xx dl [dockername] [lines]
-            查询容器输出日志，dockername 支持模糊搜索, lines 显示最后X行，默认10行
+            查询容器输出日志，dockername 支持模糊搜索, lines 输出行数，默认10行
           2.简化进入docker bash 命令，使用
             xx de [dockername]
             登入容器bash，dockername 支持模糊搜索
