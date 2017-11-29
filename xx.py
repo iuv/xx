@@ -8,6 +8,12 @@ def docker(a1, a2, a3):
 		dockerLog(a2, a3);
 	elif(a1 == "de"):
 		dockerExec(a2);
+	elif(a1 == "dr"):
+		dockerRestart(a2);
+	elif(a1 == "ds"):
+		dockerStart(a2);
+	elif(a1 == "dk"):
+		dockerStop(a2);
 	return
 
 # 查找docker窗口
@@ -31,6 +37,33 @@ def findDocker(name=" "):
 		if t > 0 and t <= len(fixres) :
 			dockername = fixres[t-1]
 	return dockername
+#重启docker
+# name 窗口名称支持模糊
+def dockerRestart(name= " "):
+	dockername = findDocker(name)
+        if dockername != "":
+            print("重启容器%s：" % dockername)
+            os.system("docker restart %s " % dockername)
+	return
+
+#启动docker
+# name 窗口名称支持模糊
+def dockerStart(name= " "):
+	dockername = findDocker(name)
+        if dockername != "":
+            print("启动容器%s：" % dockername)
+            os.system("docker start %s " % dockername)
+	return
+
+#停止docker
+# name 窗口名称支持模糊
+def dockerStop(name= " "):
+	dockername = findDocker(name)
+        if dockername != "":
+            print("停止容器%s：" % dockername)
+            os.system("docker stop %s " % dockername)
+	return
+
 
 #处理docker 日志函数
 # name 容器名称，支持模糊
