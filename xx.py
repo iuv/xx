@@ -96,13 +96,22 @@ def helps( version ):
           2.简化进入docker bash 命令，使用
             xx de [dockername]
             登入容器bash，dockername 支持模糊搜索
+          3.简化启动docker 命令，使用
+            xx ds [dockername]
+            启动容器，dockername 支持模糊搜索
+          4.简化重启docker 命令，使用
+            xx dr [dockername]
+            重新启动容器，dockername 支持模糊搜索
+          5.简化停止docker 命令，使用
+            xx dk [dockername]
+            停止容器，dockername 支持模糊搜索
         """ % version
         return
 def versions( version ):
     print("xx v%s" % version);
 
 #主方法执行
-version = "0.2" # 版本号
+version = "0.3" # 版本号
 a1 = sys.argv[1]
 a2 = None
 a3 = None
