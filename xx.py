@@ -17,8 +17,8 @@ def docker(a1, a2, a3):
 	return
 
 # 查找docker窗口
-def findDocker(name=" "):
-	dsprint = os.popen("docker ps | grep \"%s\"" % name)
+def findDocker(name=" ", para = ""):
+	dsprint = os.popen("docker ps %s | grep \"%s\"" % (para,name))
 	res = dsprint.readlines()
 	fixres = []
 	dockername = ""
@@ -49,7 +49,7 @@ def dockerRestart(name= " "):
 #启动docker
 # name 窗口名称支持模糊
 def dockerStart(name= " "):
-	dockername = findDocker(name)
+	dockername = findDocker(name, "-a")
         if dockername != "":
             print("启动容器%s：" % dockername)
             os.system("docker start %s " % dockername)
