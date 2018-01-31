@@ -44,6 +44,7 @@ def dockerRestart(name= " "):
         if dockername != "":
             print("重启容器%s：" % dockername)
             os.system("docker restart %s " % dockername)
+            os.system("docker logs --tail %s -f %s" % (10,dockername))
 	return
 
 #启动docker
@@ -53,6 +54,7 @@ def dockerStart(name= " "):
         if dockername != "":
             print("启动容器%s：" % dockername)
             os.system("docker start %s " % dockername)
+            os.system("docker logs --tail %s -f %s" % (10,dockername))
 	return
 
 #停止docker
