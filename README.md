@@ -19,16 +19,19 @@ xx dl [dockername] [lines]
 xx de [dockername]
 ```
 登入容器bash，`dockername` 支持模糊搜索
+
 3.简化启动docker 命令，使用
 ```shell
 xx ds [dockername]
 ```
 启动容器，dockername 支持模糊搜索
+
 4.简化重启docker 命令，使用
 ```shell
 xx dr [dockername]
 ```
 重新启动容器，dockername 支持模糊搜索
+
 5.简化停止docker 命令，使用
 ```shell
 xx dk [dockername]
