@@ -42,9 +42,10 @@ def findDocker(name=" ", para = ""):
 def dockerRestart(name= " "):
 	dockername = findDocker(name)
         if dockername != "":
-            print("重启容器%s：" % dockername)
-            os.system("docker restart %s " % dockername)
-            os.system("docker logs --tail %s -f %s" % (10,dockername))
+            t = raw_input("确定重启容器%s 吗？[y/n]：" % dockername)
+            if(t == "y" or t == "Y"):
+                os.system("docker restart %s " % dockername)
+                os.system("docker logs --tail %s -f %s" % (10,dockername))
 	return
 
 #启动docker
@@ -62,8 +63,9 @@ def dockerStart(name= " "):
 def dockerStop(name= " "):
 	dockername = findDocker(name)
         if dockername != "":
-            print("停止容器%s：" % dockername)
-            os.system("docker stop %s " % dockername)
+            t = raw_input("确定停止容器%s 吗？[y/n]：" % dockername)
+            if(t == "y" or t == "Y"):
+                os.system("docker stop %s " % dockername)
 	return
 
 
