@@ -115,7 +115,7 @@ def versions( version ):
     print("xx v%s" % version);
 
 #主方法执行
-version = "0.3" # 版本号
+version = "0.4" # 版本号
 a1 = sys.argv[1]
 a2 = None
 a3 = None
