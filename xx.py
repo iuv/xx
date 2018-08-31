@@ -4,6 +4,8 @@ import sys,os
 
 #处理docker相关操作
 def docker(a1, a2, a3, a4):
+    print("xxx:%s"%a1)
+    print("xxx:%s"%a4)
     if(a1 == "dl"):
         dockerLog(a2, a3);
     elif(a1 == "de"):
