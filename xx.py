@@ -3,7 +3,7 @@
 import sys,os
 
 #处理docker相关操作
-def docker(a1, a2, a3):
+def docker(a1, a2, a3, a4):
     if(a1 == "dl"):
         dockerLog(a2, a3);
     elif(a1 == "de"):
@@ -19,7 +19,7 @@ def docker(a1, a2, a3):
     elif(a1 == "kp"):
         k8sPod(a2);
     elif(a1 == "kl"):
-        podLog(a2, a3);
+        podLog(a2, a3, a4);
     elif(a1 == "ke"):
         podBash(a2, a3);
     return
@@ -209,11 +209,16 @@ version = "0.5" # 版本号
 a1 = sys.argv[1]
 a2 = None
 a3 = None
+a4 = None
 if(len(sys.argv) == 3):
     a2 = sys.argv[2]
 if(len(sys.argv) == 4):
     a2 = sys.argv[2]
     a3 = sys.argv[3]
+if(len(sys.argv) == 5):
+    a2 = sys.argv[2]
+    a3 = sys.argv[3]
+    a4 = sys.argv[4]
 if(str(a1).startswith("d") or str(a1).startswith("k")):
     docker(a1,a2,a3)
 elif a1 == "-h" or a1 == "help":
