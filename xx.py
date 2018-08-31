@@ -220,7 +220,7 @@ if(len(sys.argv) == 5):
     a3 = sys.argv[3]
     a4 = sys.argv[4]
 if(str(a1).startswith("d") or str(a1).startswith("k")):
-    docker(a1,a2,a3)
+    docker(a1,a2,a3,a4)
 elif a1 == "-h" or a1 == "help":
     helps(version)
 elif a1 == "-v" or a1 == "version":
