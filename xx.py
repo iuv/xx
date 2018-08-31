@@ -97,56 +97,56 @@ def dockerExec(name = " "):
             print("登入 %s bash：" % dockername)
             os.system("docker exec -it  %s bash" % dockername)
 	return
+
 def helps( version ):
-        print """
-            xx工具（%s）使用帮助
-        了解更多请访问 https://github.com/iuv/xx
-        docker 相关操作
-          1.简化查询docker 命令，使用
-            xx dl [dockername] [lines]
-            查询容器输出日志，dockername 支持模糊搜索, lines 输出行数，默认10行
-          2.简化进入docker bash 命令，使用
-            xx de [dockername]
-            登入容器bash，dockername 支持模糊搜索
-          3.简化启动docker 命令，使用
-            xx ds [dockername]
-            启动容器，dockername 支持模糊搜索
-          4.简化重启docker 命令，使用
-            xx dr [dockername]
-            重新启动容器，dockername 支持模糊搜索
-          5.简化停止docker 命令，使用
-            xx dk [dockername]
-            停止容器，dockername 支持模糊搜索
-		k8s 相关操作
-          1.简化查询namespace 命令，使用
-            xx kn
-          2.简化查询pod 命令，使用
-            xx kp [namespace]
-            namespace 命名空间
-          3.简化进入pod bash 命令，使用
-            xx ke [pod] [namespace]
-            登入pod bash，pod pod名称支持模糊搜索，namespace 所属命名空间
-          4.简化查询pod 日志命令，使用
-            xx kl [pod] [namespace]
-            查询pod日志，pod名称支持模糊搜索，namespace 所属命名空间
-        """ % version
-        return
+    print """
+        xx工具（%s）使用帮助
+    了解更多请访问 https://github.com/iuv/xx
+    docker 相关操作
+      1.简化查询docker 命令，使用
+        xx dl [dockername] [lines]
+        查询容器输出日志，dockername 支持模糊搜索, lines 输出行数，默认10行
+      2.简化进入docker bash 命令，使用
+        xx de [dockername]
+        登入容器bash，dockername 支持模糊搜索
+      3.简化启动docker 命令，使用
+        xx ds [dockername]
+        启动容器，dockername 支持模糊搜索
+      4.简化重启docker 命令，使用
+        xx dr [dockername]
+        重新启动容器，dockername 支持模糊搜索
+      5.简化停止docker 命令，使用
+        xx dk [dockername]
+        停止容器，dockername 支持模糊搜索
+	k8s 相关操作
+      1.简化查询namespace 命令，使用
+        xx kn
+      2.简化查询pod 命令，使用
+        xx kp [namespace]
+        namespace 命名空间
+      3.简化进入pod bash 命令，使用
+        xx ke [pod] [namespace]
+        登入pod bash，pod pod名称支持模糊搜索，namespace 所属命名空间
+      4.简化查询pod 日志命令，使用
+        xx kl [pod] [namespace]
+        查询pod日志，pod名称支持模糊搜索，namespace 所属命名空间
+    """ % version
+    return
+
 def versions( version ):
-    print("xx v%s" % version);
+    print("xx v%s" % version)
 
 #处理k8s查看namespace
 def k8sNamespace():
-    print("查看namespace，命令：kubectl get namespace")
-    os.system("kubectl get namespace")
-	return
-
+	print("查看namespace，命令：kubectl get namespace")
+	os.system("kubectl get namespace")
 #处理k8s查看pod
 # namespace 命名空间
 def k8sPod(namespace = ""):
-    print("查看pod，namespace:%s，命令：kubectl get pod -n %s" % (namespace, namespace))
+	print("查看pod，namespace:%s，命令：kubectl get pod -n %s" % (namespace, namespace))
 	if namespace != "":
 		namespace = " -n " % namespace
-    os.system("kubectl get pod %s" % namespace)
+	os.system("kubectl get pod %s" % namespace)
 	return
 
 # 查找pod
@@ -183,9 +183,9 @@ def podLog(pod = "", namespace = "",lines = 10):
 	if namespace != "":
 		namespace = " -n " % namespace;
 	podname = findPod(pod, namespace)
-        if podname != "":
-            print("查看%s日志：" % pod)
-			os.system("kubectl logs --tail %s -f %s %s" % (lines, podname, namespace))
+	if podname != "":
+		print("查看%s日志：" % pod)
+		os.system("kubectl logs --tail %s -f %s %s" % (lines, podname, namespace))
 	return
 
 #处理k8s pod 进入bash
@@ -195,9 +195,9 @@ def podBash(pod = "", namespace = ""):
 	if namespace != "":
 		namespace = " -n " % namespace;
 	podname = findPod(pod, namespace)
-        if podname != "":
-            print("进入%s bash：" % pod)
-			os.system("kubectl exec -it %s %s -- bash" % (podname, namespace))
+	if podname != "":
+		print("进入%s bash：" % pod)
+		os.system("kubectl exec -it %s %s -- bash" % (podname, namespace))
 	return
 
 
