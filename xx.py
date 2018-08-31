@@ -14,6 +14,14 @@ def docker(a1, a2, a3):
 		dockerStart(a2);
 	elif(a1 == "dk"):
 		dockerStop(a2);
+	elif(a1 == "kn"):
+		k8sNamespace();
+	elif(a1 == "kp"):
+		k8sPod(a2);
+	elif(a1 == "kl"):
+		podLog(a2, a3);
+	elif(a1 == "ke"):
+		podBash(a2, a3);
 	return
 
 # 查找docker窗口
@@ -109,13 +117,92 @@ def helps( version ):
           5.简化停止docker 命令，使用
             xx dk [dockername]
             停止容器，dockername 支持模糊搜索
+		k8s 相关操作
+          1.简化查询namespace 命令，使用
+            xx kn
+          2.简化查询pod 命令，使用
+            xx kp [namespace]
+            namespace 命名空间
+          3.简化进入pod bash 命令，使用
+            xx ke [pod] [namespace]
+            登入pod bash，pod pod名称支持模糊搜索，namespace 所属命名空间
+          4.简化查询pod 日志命令，使用
+            xx kl [pod] [namespace]
+            查询pod日志，pod名称支持模糊搜索，namespace 所属命名空间
         """ % version
         return
 def versions( version ):
     print("xx v%s" % version);
 
+#处理k8s查看namespace
+def k8sNamespace():
+    print("查看namespace，命令：kubectl get namespace")
+    os.system("kubectl get namespace")
+	return
+
+#处理k8s查看pod
+# namespace 命名空间
+def k8sPod(namespace = ""):
+    print("查看pod，namespace:%s，命令：kubectl get pod -n %s" % (namespace, namespace))
+	if namespace != "":
+		namespace = " -n " % namespace
+    os.system("kubectl get pod %s" % namespace)
+	return
+
+# 查找pod
+def findPod(pod = "", namespace = ""):
+	if namespace != "":
+		namespace = " -n " % namespace
+	dsprint = os.popen("kubectl get pod %s | grep \"%s\"" % (namespace, pod))
+	res = dsprint.readlines()
+	fixres = []
+	podname = ""
+	for r in res:
+		rs = r.split()
+		if rs[0].find(pod) >=0 :
+			fixres.append(rs[0])
+	if len(fixres) == 0:
+		print("未找到pod，请检查输入")
+	elif len(fixres) == 1:
+		podname = fixres[0]
+	elif len(fixres) > 1:
+		for i in range(0, len(fixres)):
+			print("%d:%s" % (i+1,fixres[i]))
+		t = int(raw_input("请选择pod："))
+		if t > 0 and t <= len(fixres) :
+			podname = fixres[t-1]
+	return podname
+
+#处理k8s pod 日志函数
+# pod pod名称，支持模糊
+# namespace 命名空间
+# lines 显示log行数，默认10
+def podLog(pod = "", namespace = "",lines = 10):
+	if lines is None:
+	    lines = 10
+	if namespace != "":
+		namespace = " -n " % namespace;
+	podname = findPod(pod, namespace)
+        if podname != "":
+            print("查看%s日志：" % pod)
+			os.system("kubectl logs --tail %s -f %s %s" % (lines, podname, namespace))
+	return
+
+#处理k8s pod 进入bash
+# pod pod名称，支持模糊
+# namespace 命名空间
+def podBash(pod = "", namespace = ""):
+	if namespace != "":
+		namespace = " -n " % namespace;
+	podname = findPod(pod, namespace)
+        if podname != "":
+            print("进入%s bash：" % pod)
+			os.system("kubectl exec -it %s %s -- bash" % (podname, namespace))
+	return
+
+
 #主方法执行
-version = "0.4" # 版本号
+version = "0.5" # 版本号
 a1 = sys.argv[1]
 a2 = None
 a3 = None
