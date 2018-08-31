@@ -20,40 +20,44 @@ xx de [dockername]
 ```
 登入容器bash，`dockername` 支持模糊搜索
 
-3.简化启动docker 命令，使用
+3. 简化启动docker 命令，使用
 ```shell
 xx ds [dockername]
 ```
 启动容器，dockername 支持模糊搜索
 
-4.简化重启docker 命令，使用
+4. 简化重启docker 命令，使用
 ```shell
 xx dr [dockername]
 ```
 重新启动容器，dockername 支持模糊搜索
 
-5.简化停止docker 命令，使用
+5. 简化停止docker 命令，使用
 ```shell
 xx dk [dockername]
 ```
 停止容器，dockername 支持模糊搜索
 
 ### k8s 相关操作
-1.简化查询namespace 命令，使用
+
+1. 简化查询namespace 命令，使用
 ```shell
 xx kn
 ```
-2.简化查询pod 命令，使用
+
+2. 简化查询pod 命令，使用
 ```shell
 xx kp [namespace]
 ```
-namespace 命名空间
-3.简化进入pod bash 命令，使用
+namespace 命名空间  
+
+3. 简化进入pod bash 命令，使用
 ```shell
 xx ke [pod] [namespace]
 ```
 登入pod bash，pod pod名称支持模糊搜索，namespace 所属命名空间
-4.简化查询pod 日志命令，使用
+
+4. 简化查询pod 日志命令，使用
 ```shell
 xx kl [pod] [namespace] [lines]
 ```
