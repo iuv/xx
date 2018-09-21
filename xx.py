@@ -181,7 +181,7 @@ def findPod(pod = "", namespace = ""):
 
 # 查找namespace
 def findNameSpace(namespace = ""):
-    return findX("namespace", "", "")
+    return findX("namespace", namespace, "")
 
 # 查找x  t:类别  x:名称（支持模糊） namespace 命名空间
 def findX(t ,x = "", namespace = ""):
