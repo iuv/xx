@@ -1,7 +1,7 @@
 # xx
 shell 简化命令，常用命令精简
 ## 安装方法
-1. 使用 `wget -O - https://raw.githubusercontent.com/iuv/xx/master/xx | bash` 下载xx文件
+1. 使用 `wget -O - https://raw.githubusercontent.com/iuv/xx/master/xx ; bash xx install` 下载xx文件
 2. 可以使用 `xx` 命令了
 3. 更新使用 `xx update` 命令
 
