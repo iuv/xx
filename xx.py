@@ -17,11 +17,25 @@ def docker(a1, a2, a3, a4):
     elif(a1 == "kn"):
         k8sNamespace();
     elif(a1 == "kp"):
-        k8sPod(a2);
+        k8sget(a2, "pod")
     elif(a1 == "kl"):
         podLog(a2, a3, a4);
     elif(a1 == "ke"):
         podBash(a2, a3);
+    elif(a1 == "ks"):
+        k8sget(a2, "service")
+    elif(a1 == "ki"):
+        k8sget(a2, "ingress")
+    elif(a1 == "kd"):
+        k8sget(a2, "deploy")
+    elif(a1 == "kdp"):
+        k8sDesc(a3,"pod", a2);
+    elif(a1 == "kdi"):
+        k8sDesc(a3,"ingress", a2);
+    elif(a1 == "kds"):
+        k8sDesc(a3,"service", a2);
+    elif(a1 == "kdd"):
+        k8sDesc(a3,"deployments", a2);
     return
 
 # 查找docker窗口
@@ -122,13 +136,34 @@ def helps( version ):
         xx kn
       2.简化查询pod 命令，使用
         xx kp [namespace]
-        namespace 命名空间
+        namespace 命名空间以!结尾支持模糊
       3.简化进入pod bash 命令，使用
         xx ke [pod] [namespace]
-        登入pod bash，pod pod名称支持模糊搜索，namespace 所属命名空间
+        登入pod bash，pod pod名称支持模糊搜索，namespace 所属命名空间以!结尾支持模糊
       4.简化查询pod 日志命令，使用
         xx kl [pod] [namespace] [lines]
-        查询pod日志，pod名称支持模糊搜索，namespace 所属命名空间, lines 输出行数，默认10行
+        查询pod日志，pod名称支持模糊搜索，namespace 所属命名空间以!结尾支持模糊, lines 输出行数，默认10行
+      5.简化查询deployments 命令，使用
+        xx kd [namespace]
+        namespace 命名空间以!结尾支持模糊
+      6.简化查询ingress 命令，使用
+        xx ki [namespace]
+        namespace 命名空间以!结尾支持模糊
+      7.简化查询service 命令，使用
+        xx ks [namespace]
+        namespace 命名空间以!结尾支持模糊
+      8.简化查询pod describe命令，使用
+        xx kdp [pod] [namespace]
+        pod名称支持模糊搜索 namespace 命名空间以!结尾支持模糊
+      9.简化查询ingress describe命令，使用
+        xx kdi [ingress] [namespace]
+        ingress名称支持模糊搜索 namespace 命名空间以!结尾支持模糊
+      10.简化查询service describe命令，使用
+        xx kds [service] [namespace]
+        service名称支持模糊搜索 namespace 命名空间以!结尾支持模糊
+      11.简化查询deployments describe命令，使用
+        xx kdd [deployments] [namespace]
+        service名称支持模糊搜索 namespace 命名空间以!结尾支持模糊
     """ % version
     return
 
@@ -139,38 +174,48 @@ def versions( version ):
 def k8sNamespace():
     print("查看namespace，命令：kubectl get namespace")
     os.system("kubectl get namespace")
-#处理k8s查看pod
-# namespace 命名空间
-def k8sPod(namespace = ""):
-    print("查看pod，命令：kubectl get pod %s" % (namespace))
-    if namespace is None:
-        namespace = ""
-    else:
-        namespace = " -n " + namespace
-    os.system("kubectl get pod %s" % namespace)
-    return
 
 # 查找pod
 def findPod(pod = "", namespace = ""):
-    dsprint = os.popen("kubectl get pod %s | grep \"%s\"" % (namespace, pod))
+    return findX("pod", pod, namespace)
+
+# 查找namespace
+def findNameSpace(namespace = ""):
+    return findX("namespace", "", "")
+
+# 查找x  t:类别  x:名称（支持模糊） namespace 命名空间
+def findX(t ,x = "", namespace = ""):
+    dsprint = os.popen("kubectl get %s %s | grep \"%s\"" % (t, namespace, x))
     res = dsprint.readlines()
     fixres = []
-    podname = ""
+    xname = ""
     for r in res:
         rs = r.split()
-        if rs[0].find(pod) >=0 :
+        if rs[0].find(x) >=0 :
             fixres.append(rs[0])
     if len(fixres) == 0:
-        print("未找到pod，请检查输入")
+        print("未找到%s，请检查输入" % (t))
     elif len(fixres) == 1:
-        podname = fixres[0]
+        xname = fixres[0]
     elif len(fixres) > 1:
         for i in range(0, len(fixres)):
             print("%d:%s" % (i+1,fixres[i]))
-        t = int(raw_input("请选择pod："))
-        if t > 0 and t <= len(fixres) :
-            podname = fixres[t-1]
-    return podname
+        m = int(raw_input("请选择%s："%(t)))
+        if m > 0 and m <= len(fixres) :
+            xname = fixres[m-1]
+    return xname
+
+
+# 处理namespace
+def fixNS(namespace):
+    if namespace is None or namespace == "":
+        namespace = ""
+    elif namespace.find("!")<0 and namespace[0:3] != " -n":
+        namespace = " -n " + namespace
+    elif namespace.find("!")>=0:
+        namespace = findNameSpace(namespace[0:-1])
+        namespace = " -n " + namespace
+    return namespace
 
 #处理k8s pod 日志函数
 # pod pod名称，支持模糊
@@ -179,10 +224,7 @@ def findPod(pod = "", namespace = ""):
 def podLog(pod = "", namespace = "",lines = 10):
     if lines is None:
         lines = 10
-    if namespace is None:
-        namespace = ""
-    else:
-        namespace = " -n " + namespace
+    namespace = fixNS(namespace)
     podname = findPod(pod, namespace)
     if podname != "":
         command = "kubectl logs --tail %s -f %s %s" % (lines, podname, namespace);
@@ -194,8 +236,7 @@ def podLog(pod = "", namespace = "",lines = 10):
 # pod pod名称，支持模糊
 # namespace 命名空间
 def podBash(pod = "", namespace = ""):
-    if namespace != "":
-        namespace = " -n " + namespace;
+    namespace = fixNS(namespace)
     podname = findPod(pod, namespace)
     if podname != "":
         command = "kubectl exec -it %s %s -- bash" % (podname, namespace)
@@ -204,8 +245,24 @@ def podBash(pod = "", namespace = ""):
     return
 
 
+def k8sget(namespace, cmd):
+    k8sCmd(namespace, cmd, "get", "")
+
+def k8sDesc(namespace, cmd, x):
+    ns = fixNS(namespace)
+    x = findX(cmd, x, ns);
+    k8sCmd(ns, cmd, "describe", x)
+
+#执行方法  修复namespace
+def k8sCmd(namespace, cmd, t, pod):
+    namespace = fixNS(namespace)
+    command = "kubectl %s %s %s %s" % (t, cmd, pod, namespace)
+    print("获取%s 下的%s，命令：%s" % (namespace, cmd, command))
+    os.system(command)
+    return
+
 #主方法执行
-version = "0.5" # 版本号
+version = "0.6" # 版本号
 a1 = sys.argv[1]
 a2 = None
 a3 = None
