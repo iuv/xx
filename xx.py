@@ -214,7 +214,10 @@ def fixNS(namespace):
         namespace = " -n " + namespace
     elif namespace.find("!")>=0:
         namespace = findNameSpace(namespace[0:-1])
-        namespace = " -n " + namespace
+        if namespace is None or namespace == "":
+            namespace = ""
+        else:
+            namespace = " -n " + namespace
     return namespace
 
 #处理k8s pod 日志函数
