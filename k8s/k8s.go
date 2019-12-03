@@ -2,7 +2,7 @@ package k8s
 
 import (
 	"fmt"
-	"gopkg.in/AlecAivazis/survey.v2"
+	"github.com/AlecAivazis/survey/v2"
 	"io/ioutil"
 	"strconv"
 	"strings"

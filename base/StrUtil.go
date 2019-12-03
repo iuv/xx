@@ -2,7 +2,7 @@ package base
 
 import (
 	"fmt"
-	"gopkg.in/AlecAivazis/survey.v2"
+	"github.com/AlecAivazis/survey/v2"
 	"strconv"
 	"strings"
 )
