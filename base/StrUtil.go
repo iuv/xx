@@ -2,7 +2,7 @@ package base
 
 import (
 	"fmt"
-	"github.com/AlecAivazis/survey/v2"
+	"github.com/AlecAivazis/survey"
 	"strconv"
 	"strings"
 )
