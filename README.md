@@ -1,7 +1,10 @@
 # xx 简化命令工具 v1.0
 本工具为简化常用shell、docker、kubernetes命令使用
+
 0.X版本使用python编写，需要运行环境支持py及需要sh脚本支持运行，为了解决运行环境依赖及保持单文件执行
+
 1.X及以后版本将使用go语言编写
+
 如需要自己编译，可clone本仓库并运行build.sh脚本
 ## 安装方法
 1. 使用 `wget https://raw.githubusercontent.com/iuv/xx/master/xx ; bash xx install` 下载xx文件
