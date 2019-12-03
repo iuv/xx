@@ -11,16 +11,16 @@
 ## 使用帮助如下：
 
 ### shell:
-  1. xx ip [port] 获取本地ip
-    示例结果：
-    Local IP: 172.16.112.12
-    HTTP Server: http://172.16.112.12
-    HTTP Server: http://172.16.112.12:8080
-    
-    可选输出
-    
-    HTTP Server: http://172.16.112.12:[port]
-  2. xx ps [str] 获取进程，根据str模糊搜索，并高亮显示
+1. xx ip [port] 获取本地ip
+```
+ 示例结果：
+ Local IP: 172.16.112.12
+ HTTP Server: http://172.16.112.12
+ HTTP Server: http://172.16.112.12:8080
+ 可选输出
+ HTTP Server: http://172.16.112.12:[port]
+```
+2. xx ps [str] 获取进程，根据str模糊搜索，并高亮显示
 
 ### docker(参数为空且需要后续参数时使用"@"占位):
 1、查询docker日志命令，使用
