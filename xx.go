@@ -42,8 +42,13 @@ func install()  {
 	base.Execp("chmod 775 /usr/local/bin/xx")
 }
 // 更新
-func update()  {
-	base.Execp("wget https://raw.githubusercontent.com/iuv/xx/master/xx -O /usr/local/bin/xx")
+func update() {
+	sys := base.Sys()
+	if sys == "mac"{
+		base.Execp("wget https://raw.githubusercontent.com/iuv/xx/raw/master/build/mac/xx -O /usr/local/bin/xx")
+	} else if sys == "linux"{
+		base.Execp("wget https://raw.githubusercontent.com/iuv/xx/raw/master/build/linux/xx -O /usr/local/bin/xx")
+	}
 	base.Execp("chmod 775 /usr/local/bin/xx")
 }
 func setArg(args []string)(string,string,string,string,string){
