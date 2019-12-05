@@ -16,10 +16,10 @@ func main() {
 		return
 	}
 	s := args[1]
-	a1,a2,a3,_,_ := setArg(args)
+	a1,a2,a3,a4,_ := setArg(args)
 	switch s[0:1] {
 	case "d": docker.Docker(s[1:], a1, a2)
-	case "k": k8s.K8s(s[1:], a1, a2, a3)
+	case "k": k8s.K8s(s[1:], a1, a2, a3, a4)
 	default:
 		switch s{
 		case "ip": shell.Ip(a1)
@@ -45,11 +45,14 @@ func install()  {
 func update() {
 	sys := base.Sys()
 	if sys == "mac"{
-		base.Execp("wget https://raw.githubusercontent.com/iuv/xx/raw/master/build/mac/xx -O /usr/local/bin/xx")
+		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx -O /tmp/xx")
 	} else if sys == "linux"{
-		base.Execp("wget https://raw.githubusercontent.com/iuv/xx/raw/master/build/linux/xx -O /usr/local/bin/xx")
+		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx -O /tmp/xx")
 	}
-	base.Execp("chmod 775 /usr/local/bin/xx")
+	base.Exec("cd /tmp")
+	base.Execp("chmod 775 /tmp/xx")
+	base.Execp("/tmp/xx install")
+	base.Exec("cd -")
 }
 func setArg(args []string)(string,string,string,string,string){
 	a1,a2,a3,a4,a5 := "","","","",""

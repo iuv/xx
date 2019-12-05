@@ -9,7 +9,7 @@ import (
 	"xx/base"
 )
 
-func K8s(cmd,a1,a2,a3 string){
+func K8s(cmd,a1,a2,a3,a4 string){
 	switch cmd {
 	case "n": namespace(a1)
 	case "p": pod(a1, a2)
@@ -31,8 +31,18 @@ func K8s(cmd,a1,a2,a3 string){
 	case "idel": ingressDel(a1, a2)
 	case "sdel": serviceDel(a1, a2)
 	case "a": apply(a1)
+	case "cp": cp(a1, a2, a3, a4)
 	default: fmt.Println("command not found: k"+cmd)
 	}
+}
+// k8s cp 复制文件
+func cp(pod, namespace, srcFile, saveFile string)  {
+	pod, namespace = getResAndNamespace("pod", pod, namespace)
+	if pod == ""{
+		return
+	}
+	ret := base.Execp("kubectl cp "+namespace+"/"+pod+":"+srcFile+" "+saveFile)
+	fmt.Print(ret)
 }
 // apply yml 文件
 func apply(file string)  {

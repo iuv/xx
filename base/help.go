@@ -124,6 +124,10 @@ k8s(参数为空且需要后续参数时使用"@"占位):
   20、应用yaml配置文件命令，使用
     xx ka [file]
     file yaml配置文件
+
+  21、从pod容器中复制文件命令，使用
+    xx kcp [pod] [namespace] [srcFile] [saveFile]
+    pod名称支持模糊搜索，namespace 命名空间支持模糊, srcFile 容器中要复制的文件路径, saveFile 本地保存路径
 `
 func Help(key string){
 	fmt.Println(title)
