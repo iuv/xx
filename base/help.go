@@ -29,7 +29,7 @@ docker(参数为空且需要后续参数时使用"@"占位):
   
   2、进入docker bash 命令，使用
     xx de [dockername]
-    登入容器bash，dockername 支持模糊搜索
+    进入容器bash，dockername 支持模糊搜索
   
   3、启动docker 命令，使用
     xx ds [dockername]
@@ -42,6 +42,22 @@ docker(参数为空且需要后续参数时使用"@"占位):
   5、停止docker 命令，使用
     xx dk [dockername]
     停止容器，dockername 支持模糊搜索
+
+  6、查找docker镜像，使用
+    xx di [dockername]
+    查找镜像，dockername 支持模糊搜索
+
+  7、拉取docker镜像，使用
+    xx dpl [dockername]
+    拉取镜像，dockername，镜像全路径
+
+  8、推送docker镜像，使用
+    xx dph [dockername]
+    推送镜像，dockername 支持模糊搜索
+
+  9、docker镜像打tag，使用
+    xx dt [dockername] [tagname]
+    镜像打tag，dockername 支持模糊搜索， tagname 需要打的tag名称
 `
 var k8s = `
 k8s(参数为空且需要后续参数时使用"@"占位):

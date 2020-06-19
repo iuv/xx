@@ -16,12 +16,43 @@ func Docker(cmd,a1,a2 string){
 	case "s": start(a1)
 	case "r": restart(a1)
 	case "k": stop(a1)
+	case "pl": pull(a1)
+	case "ph": push(a1)
+	case "t": tag(a1, a2)
 	default: fmt.Println("command not found: d"+cmd)
 	}
 }
+// 打tag
+func tag(key string, t string){
+	name := findImageName(key)
+	if name == "" {
+		return
+	}
+	startCmd := "docker tag "+ name +" "+t
+	base.Execp(startCmd)
+}
+// 推送镜像
+func push(key string){
+	name := findImageName(key)
+	if name == "" {
+		return
+	}
+	startCmd := "docker push "+name
+	base.Execp(startCmd)
+}
+
+// 拉取镜像
+func pull(key string){
+	if key == "" {
+		return
+	}
+	startCmd := "docker pull "+key
+	base.Execp(startCmd)
+}
+
 // 停止容器
 func stop(key string)  {
-	name := findName(key)
+	name := findPsAllName(key)
 	if name == "" {
 		return
 	}
@@ -37,7 +68,7 @@ func stop(key string)  {
 }
 // 重启容器
 func restart(key string)  {
-	name := findName(key)
+	name := findPsAllName(key)
 	if name == ""{
 		return
 	}
@@ -55,7 +86,7 @@ func restart(key string)  {
 }
 // 启动容器
 func start(key string)  {
-	name := findName(key)
+	name := findPsAllName(key)
 	if name == ""{
 		return
 	}
@@ -69,7 +100,7 @@ func logs(key, line string)  {
 	if line == "" {
 		line = "100"
 	}
-	name := findName(key)
+	name := findPsAllName(key)
 	if name == "" {
 		return
 	}
@@ -79,20 +110,30 @@ func logs(key, line string)  {
 
 // 进入容器bash
 func bash(a1 string){
-	name := findName(a1)
+	name := findPsAllName(a1)
 	if name == "" {
 		return
 	}
 	cmd := "docker exec -it "+name+" /bin/bash"
 	base.Run(cmd)
 }
-// 查找相交容器名称
-func findName(key string) string{
+// 查找相关容器名称
+func findPsAllName(key string) string{
+	cmd := "docker ps -a"
+	return findNameByCmd(key, cmd)
+}
+// 查询镜像名称
+func findImageName(key string) string{
+	cmd := "docker images"
+	return findNameByCmd(key, cmd)
+}
+// 基础查找名称
+func findNameByCmd(key string, cmd string) string{
 	if key == "@" {
 		key = ""
 	}
 	var rs []string
-	ret := base.Exec("docker ps -a")
+	ret := base.Exec(cmd)
 	rets := strings.Split(ret, "\n")
 	for i:=1; i<len(rets)-1; i++{
 		strs := strings.Fields(rets[i])

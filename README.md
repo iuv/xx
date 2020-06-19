@@ -1,4 +1,4 @@
-# xx 简化命令工具 v1.0
+# xx 简化命令工具 v1.1
 本工具为简化常用shell、docker、kubernetes命令使用
 
 0.X版本使用python编写，需要运行环境支持py及需要sh脚本支持运行，为了解决运行环境依赖及保持单文件执行
@@ -7,9 +7,10 @@
 
 如需要自己编译，可clone本仓库并运行build.sh脚本
 ## 安装方法
-1. 使用 `wget https://raw.githubusercontent.com/iuv/xx/master/xx ; bash xx install` 下载xx文件
-2. 可以使用 `xx` 命令了
-3. 更新使用 `xx update` 命令
+1. Mac使用 `wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx ; ./xx install` 下载xx文件并安装
+2. linux使用 `wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx ; ./xx install` 下载xx文件并安装
+3. 可以使用 `xx` 命令了
+4. 更新使用 `xx update` 命令
 
 ## 使用帮助如下：
 
@@ -38,7 +39,7 @@ xx dl [dockername] [lines]
 ```shell
 xx de [dockername]
 ```
-登入容器bash，dockername 支持模糊搜索
+进入容器bash，dockername 支持模糊搜索
 
 3、启动docker 命令，使用
 ```shell
@@ -57,6 +58,30 @@ xx dr [dockername]
 xx dk [dockername]
 ```
 停止容器，dockername 支持模糊搜索
+
+6、查找docker镜像，使用
+```shell
+xx di [dockername]
+```
+查找镜像，dockername 支持模糊搜索
+
+7、拉取docker镜像，使用
+```shell
+xx dpl [dockername]
+```
+拉取镜像，dockername，镜像全路径
+
+8、推送docker镜像，使用
+```shell
+xx dph [dockername]
+```
+推送镜像，dockername 支持模糊搜索
+
+9、docker镜像打tag，使用
+```shell
+xx dt [dockername] [tagname]
+```
+镜像打tag，dockername 支持模糊搜索， tagname 需要打的tag名称
 
 ### k8s(参数为空且需要后续参数时使用"@"占位):
 1、查询namespace 命令，使用
