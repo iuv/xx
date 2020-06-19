@@ -7,8 +7,9 @@
 
 如需要自己编译，可clone本仓库并运行build.sh脚本
 ## 安装方法
-1. Mac使用 `wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx ; ./xx install` 下载xx文件并安装
-2. linux使用 `wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx ; ./xx install` 下载xx文件并安装
+1. Mac使用 `wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx` 下载xx文件
+2. linux使用 `wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx` 下载xx文件
+3. 执行`chmod +x xx; ./xx install` 安装
 3. 可以使用 `xx` 命令了
 4. 更新使用 `xx update` 命令
 
