@@ -127,86 +127,159 @@ xx ks [service] [namespace]
 ```
 service名称支持模糊，namespace 命名空间支持模糊
 
-8、查询pod describe命令，使用
+8、查询configmap 命令，使用
+```shell
+xx kc [configmap] [namespace]
+```
+configmap名称支持模糊，namespace 命名空间支持模糊
+
+9、查询secret 命令，使用
+```shell
+xx ksec [secret] [namespace]
+```
+secret名称支持模糊，namespace 命名空间支持模糊
+
+10、查询statefulset 命令，使用
+```shell
+xx kss [statefulset] [namespace]
+```
+statefulset名称支持模糊，namespace 命名空间支持模糊
+
+
+11、查询pod describe命令，使用
 ```shell
 xx kpd [pod] [namespace]
 ```
 pod名称支持模糊搜索，namespace 命名空间支持模糊
 
-9、查询ingress describe命令，使用
+12、查询ingress describe命令，使用
 ```shell
 xx kid [ingress] [namespace]
 ```
 ingress名称支持模糊搜索，namespace 命名空间支持模糊
 
-10、查询service describe命令，使用
+13、查询service describe命令，使用
 ```shell
 xx ksd [service] [namespace]
 ```
 service名称支持模糊搜索，namespace 命名空间支持模糊
 
-11、查询deployment describe命令，使用
+14、查询deployment describe命令，使用
 ```shell
 xx kdd [deployment] [namespace]
 ```
 deployment名称支持模糊搜索，namespace 命名空间支持模糊
 
-12、查询pod yaml命令，使用
+15、查询configmap describe命令，使用
+```shell
+xx kcd [configmap] [namespace]
+```
+configmap名称支持模糊搜索，namespace 命名空间支持模糊
+
+16、查询secret describe命令，使用
+```shell
+xx ksecd [secret] [namespace]
+```
+secret名称支持模糊搜索，namespace 命名空间支持模糊
+
+17、查询statefulset describe命令，使用
+```shell
+xx kssd [statefulset] [namespace]
+```
+statefulset名称支持模糊搜索，namespace 命名空间支持模糊
+
+18、保存pod yaml命令，使用
 ```shell
 xx kpy [pod] [namespace] [file]
 ```
 pod名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
 
-13、查询ingress yaml命令，使用
+19、保存ingress yaml命令，使用
 ```shell
 xx kiy [ingress] [namespace] [file]
 ```
 ingress名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
 
-14、查询service describe命令，使用
+20、保存service describe命令，使用
 ```shell
 xx ksy [service] [namespace] [file]
 ```
 service名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
 
-15、查询deployment yaml命令，使用
+21、保存deployment yaml命令，使用
 ```shell
 xx kdy [deployment] [namespace] [file]
 ```
 deployment名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
+
+22、保存configmap yaml命令，使用
+```shell
+xx kcy [configmap] [namespace] [file]
+```
+configmap名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
+
+23、保存secret yaml命令，使用
+```shell
+xx ksecy [secret] [namespace] [file]
+```
+secret名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
+
+24、保存statefulset yaml命令，使用
+```shell
+xx kssy [statefulset] [namespace] [file]
+```
+statefulset名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
   
-16、 删除pod命令，使用
+25、 删除pod命令，使用
 ```shell
 xx kpdel [pod] [namespace]
 ```
 pod名称支持模糊搜索，namespace 命名空间支持模糊
 
-17、查询ingress命令，使用
+26、查询ingress命令，使用
 ```shell
 xx kidel [ingress] [namespace]
 ```
 ingress名称支持模糊搜索，namespace 命名空间支持模糊
 
-18、删除service命令，使用
+27、删除service命令，使用
 ```shell
 xx ksdel [service] [namespace]
 ```
 service名称支持模糊搜索，namespace 命名空间支持模糊
 
-19、删除deployment命令，使用
+28、删除deployment命令，使用
 ```shell
 xx kddel [deployment] [namespace]
 ```
 deployment名称支持模糊搜索，namespace 命名空间支持模糊
 
-20、应用yaml配置文件命令，使用
+29、删除configmap命令，使用
+```shell
+xx kcdel [configmap] [namespace]
+```
+configmap名称支持模糊搜索，namespace 命名空间支持模糊
+
+30、删除secret命令，使用
+```shell
+xx ksecdel [secret] [namespace]
+```
+secret名称支持模糊搜索，namespace 命名空间支持模糊
+
+31、删除statefulset命令，使用
+```shell
+xx kssdel [statefulset] [namespace]
+```
+statefulset名称支持模糊搜索，namespace 命名空间支持模糊
+
+32、应用yaml配置文件命令，使用
 ```shell
 xx ka [file]
 ```
 file yaml配置文件
 
-21、从pod容器中复制文件命令，使用
+33、从pod容器中复制文件命令，使用
 ```shell
-xx kcp [pod] [namespace] [srcFile] [saveFile]
+xx kcopy [pod] [namespace] [srcFile] [saveFile]
 ```
 pod名称支持模糊搜索，namespace 命名空间支持模糊, srcFile 容器中要复制的文件路径, saveFile 本地保存路径

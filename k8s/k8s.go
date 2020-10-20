@@ -12,26 +12,44 @@ import (
 func K8s(cmd,a1,a2,a3,a4 string){
 	switch cmd {
 	case "n": namespace(a1)
-	case "p": pod(a1, a2)
 	case "e": bash(a1, a2, a3)
 	case "l": logs(a1, a2, a3)
-	case "d": deployments(a1, a2)
-	case "i": ingress(a1, a2)
-	case "s": service(a1, a2)
-	case "pd": podDesc(a1, a2)
-	case "dd": deploymentDesc(a1, a2)
-	case "id": ingressDesc(a1, a2)
-	case "sd": serviceDesc(a1, a2)
-	case "py": podYaml(a1, a2, a3)
-	case "dy": deploymentYaml(a1, a2, a3)
-	case "iy": ingressYaml(a1, a2, a3)
-	case "sy": serviceYaml(a1, a2, a3)
-	case "pdel": podDel(a1, a2)
-	case "ddel": deploymentDel(a1, a2)
-	case "idel": ingressDel(a1, a2)
-	case "sdel": serviceDel(a1, a2)
+	case "p": getResource("pod", a1, a2)
+	case "d": getResource("deployment", a1, a2)
+	case "i": getResource("ingress", a1, a2)
+	case "s": getResource("service", a1, a2)
+	case "c": getResource("configmap", a1, a2)
+	case "sec": getResource("secret", a1, a2)
+	case "ss": getResource("statefulset", a1, a2)
+	case "pd": resourceDescribe("pod", a1, a2)
+	case "dd": resourceDescribe("deployment", a1, a2)
+	case "id": resourceDescribe("ingress", a1, a2)
+	case "sd": resourceDescribe("service", a1, a2)
+	case "cd": resourceDescribe("configmap", a1, a2)
+	case "secd": resourceDescribe("secret", a1, a2)
+	case "ssd": resourceDescribe("statefulset", a1, a2)
+	case "py": resourceYaml("pod", a1, a2, a3)
+	case "dy": resourceYaml("deployment", a1, a2, a3)
+	case "iy": resourceYaml("ingress", a1, a2, a3)
+	case "sy": resourceYaml("service", a1, a2, a3)
+	case "cy": resourceYaml("configmap", a1, a2, a3)
+	case "secy": resourceYaml("secret", a1, a2, a3)
+	case "ssy": resourceYaml("statefulset", a1, a2, a3)
+	case "pdel": resourceDel("pod", a1, a2)
+	case "ddel": resourceDel("deployment", a1, a2)
+	case "idel": resourceDel("ingress", a1, a2)
+	case "sdel": resourceDel("service", a1, a2)
+	case "secdel": resourceDel("secret", a1, a2)
+	case "ssdel": resourceDel("statefulset", a1, a2)
+	case "pe": resourceEdit("pod", a1, a2)
+	case "de": resourceEdit("deployment", a1, a2)
+	case "ie": resourceEdit("ingress", a1, a2)
+	case "se": resourceEdit("service", a1, a2)
+	case "ce": resourceEdit("configmap", a1, a2)
+	case "sece": resourceEdit("secret", a1, a2)
+	case "sse": resourceEdit("statefulset", a1, a2)
 	case "a": apply(a1)
-	case "cp": cp(a1, a2, a3, a4)
+	case "copy": cp(a1, a2, a3, a4)
 	default: fmt.Println("command not found: k"+cmd)
 	}
 }
@@ -49,22 +67,6 @@ func apply(file string)  {
 	ret := base.Execp("kubectl apply -f "+file)
 	fmt.Print(ret)
 }
-// service删除
-func serviceDel(key, namespace string)  {
-	resourceDel("service", key, namespace)
-}
-// ingress删除
-func ingressDel(key, namespace string)  {
-	resourceDel("ingress", key, namespace)
-}
-// deployment删除
-func deploymentDel(key, namespace string)  {
-	resourceDel("deployment", key, namespace)
-}
-// pod删除
-func podDel(key, namespace string)  {
-	resourceDel("pod", key, namespace)
-}
 // 删除资源基本方法
 func resourceDel(res, key, namespace string)  {
 	key, namespace = getResAndNamespace(res, key, namespace)
@@ -80,23 +82,7 @@ func resourceDel(res, key, namespace string)  {
 		}
 	}
 }
-// service yaml
-func serviceYaml(key, namespace, file string)  {
-	resourceYaml("service", key, namespace, file)
-}
-// ingress yaml
-func ingressYaml(key, namespace, file string)  {
-	resourceYaml("ingress", key, namespace, file)
-}
-// deployment yaml
-func deploymentYaml(key, namespace, file string)  {
-	resourceYaml("deployment", key, namespace, file)
-}
-// pod yaml
-func podYaml(key, namespace, file string)  {
-	resourceYaml("pod", key, namespace, file)
-}
-// 查询资源详情基本方法
+// 查询资源yaml基本方法
 func resourceYaml(res, key, namespace, file string)  {
 	key, namespace = getResAndNamespace(res ,key, namespace)
 	if key != "" {
@@ -111,22 +97,6 @@ func resourceYaml(res, key, namespace, file string)  {
 		}
 	}
 }
-// service详情
-func serviceDesc(key, namespace string)  {
-	resourceDescribe("service", key, namespace)
-}
-// ingress详情
-func ingressDesc(key, namespace string)  {
-	resourceDescribe("ingress", key, namespace)
-}
-// deployment详情
-func deploymentDesc(key, namespace string)  {
-	resourceDescribe("deployment", key, namespace)
-}
-// pod详情
-func podDesc(key, namespace string)  {
-	resourceDescribe("pod", key, namespace)
-}
 // 查询资源详情基本方法
 func resourceDescribe(res, key, namespace string)  {
 	key, namespace = getResAndNamespace(res, key, namespace)
@@ -136,19 +106,6 @@ func resourceDescribe(res, key, namespace string)  {
 	}
 }
 
-// 获取service
-func service(key,namespace string)  {
-	getResource("service", key, namespace)
-}
-// 获取ingress
-func ingress(key,namespace string)  {
-	getResource("ingress", key, namespace)
-}
-
-// 获取deployments
-func deployments(key,namespace string)  {
-	getResource("deployment", key, namespace)
-}
 
 // 查询控制台日志
 func logs(pod, namespace, lines string)  {
@@ -169,10 +126,6 @@ func bash(pod, namespace, sh string)  {
 	if pod != "" {
 		base.Run("kubectl exec -it "+pod+" -n "+namespace+" -- "+sh)
 	}
-}
-// 获取pod
-func pod(key,namespace string)  {
-	getResource("pod", key, namespace)
 }
 
 // 模糊查询namespace
@@ -320,4 +273,12 @@ func getResAndNamespace(res, key, namespace string) (string,string) {
 		return "",""
 	}
 	return ret,namespace
+}
+
+// 编辑资源基本方法
+func resourceEdit(res, key, namespace string)  {
+	key, namespace = getResAndNamespace(res, key, namespace)
+	if key != "" {
+		base.Run("kubectl edit "+res+" "+ key +" -n "+namespace)
+	}
 }
