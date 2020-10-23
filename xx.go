@@ -18,7 +18,7 @@ func main() {
 	s := args[1]
 	a1,a2,a3,a4,_ := setArg(args)
 	switch s[0:1] {
-	case "d": docker.Docker(s[1:], a1, a2)
+	case "d": docker.Docker(s[1:], a1, a2, a3)
 	case "k": k8s.K8s(s[1:], a1, a2, a3, a4)
 	default:
 		switch s{

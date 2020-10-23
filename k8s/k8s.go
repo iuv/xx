@@ -167,6 +167,9 @@ func findNamespace(key string) string{
 	}
 	survey.AskOne(prompt, &name)
 	if len(ns)>base.SEL_LIMIT {
+		if name=="" || name=="q" {
+			return ""
+		}
 		idx,_ := strconv.Atoi(name)
 		name = ns[idx]
 	}
@@ -212,6 +215,9 @@ func findResByKey(txt,key string, idx int) string{
 		}
 		survey.AskOne(prompt, &name)
 		if len(ps)>base.SEL_LIMIT {
+			if name=="" || name=="q" {
+				return ""
+			}
 			idx,_ := strconv.Atoi(name)
 			name = ps[idx]
 		}

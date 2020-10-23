@@ -2,7 +2,7 @@ package base
 
 import "fmt"
 
-var Version string = "v1.2"
+var Version string = "v1.3"
 
 func V(){
 	fmt.Println(Version)

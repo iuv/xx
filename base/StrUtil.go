@@ -69,6 +69,9 @@ func FindColByKey(txt,key string, idx int) string{
 	}
 	survey.AskOne(prompt, &name)
 	if len(ps)>SEL_LIMIT {
+		if name=="" || name=="q" {
+			return ""
+		}
 		idx,_ := strconv.Atoi(name)
 		name = ps[idx]
 	}

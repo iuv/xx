@@ -1,4 +1,4 @@
-# xx 简化命令工具 v1.2
+# xx 简化命令工具 v1.3
 本工具为简化常用shell、docker、kubernetes命令使用
 
 0.X版本使用python编写，需要运行环境支持py及需要sh脚本支持运行，为了解决运行环境依赖及保持单文件执行
@@ -16,73 +16,91 @@
 ## 使用帮助如下：
 
 ### shell:
-1. xx ip [port] 获取本地ip
+1. xx ip [port] 获取本地ip及公网ip(如果有外网)
 ```
  示例结果：
  Local IP: 172.16.112.12
  HTTP Server: http://172.16.112.12
  HTTP Server: http://172.16.112.12:8080
+ Public Network IP: 8.8.8.8
  可选输出
  HTTP Server: http://172.16.112.12:[port]
 ```
 2. xx ps [str] 获取进程，根据str模糊搜索，并高亮显示
 
 ### docker(参数为空且需要后续参数时使用"@"占位):
-1、查询docker日志命令，使用
+1、运行docker命令，使用
+```shell
+xx dr [imageName] [containerName] [port]
+```
+默认使用后台进程启动 imageName 镜像名支持模糊搜索，containerName 设置容器名，port 映射的端口号
+支持"8080:8080"和"8080"两种方式，其"8080"会自动补全为"8080:8080"
+2、查询docker容器日志命令，使用
 
 ```shell
 xx dl [dockername] [lines]
 ```
+查询容器输出日志，dockername 支持镜像/容器名模糊搜索 ,lines 输出行数, 默认100行
 
-查询容器输出日志，dockername 支持模糊搜索 ,lines 输出行数, 默认100行
-
-2、进入docker bash 命令，使用
+3、进入docker bash命令，使用
 ```shell
 xx de [dockername]
 ```
-进入容器bash，dockername 支持模糊搜索
+进入容器bash，dockername 支持镜像/容器名模糊搜索
 
-3、启动docker 命令，使用
+4、启动docker容器命令，使用
 ```shell
 xx ds [dockername]
 ```
-启动容器，dockername 支持模糊搜索
+启动容器，dockername 支持镜像/容器名模糊搜索
 
-4、重启docker 命令，使用
+5、重启docker 命令，使用
 ```shell
-xx dr [dockername]
+xx drs [dockername]
 ```
-重新启动容器，dockername 支持模糊搜索
+重新启动容器，dockername 支持镜像/容器名模糊搜索
 
-5、停止docker 命令，使用
+6、停止docker 命令，使用
 ```shell
 xx dk [dockername]
 ```
-停止容器，dockername 支持模糊搜索
+停止容器，dockername 支持镜像/容器名模糊搜索
 
-6、查找docker镜像，使用
+7、查找docker镜像，使用
 ```shell
-xx di [dockername]
+xx di [imageName]
 ```
-查找镜像，dockername 支持模糊搜索
+查找镜像，imageName 支持模糊搜索
 
-7、拉取docker镜像，使用
+8、拉取docker镜像，使用
 ```shell
-xx dpl [dockername]
+xx dpl [imageName]
 ```
-拉取镜像，dockername，镜像全路径
+拉取镜像，imageName，镜像全路径
 
-8、推送docker镜像，使用
+9、推送docker镜像，使用
 ```shell
-xx dph [dockername]
+xx dph [imageName]
 ```
-推送镜像，dockername 支持模糊搜索
+推送镜像，imageName 支持模糊搜索
 
-9、docker镜像打tag，使用
+10、docker镜像打tag，使用
 ```shell
-xx dt [dockername] [tagname]
+xx dt [imageName] [tagname]
 ```
-镜像打tag，dockername 支持模糊搜索， tagname 需要打的tag名称
+镜像打tag，imageName 支持模糊搜索， tagname 需要打的tag名称
+
+11、docker查看所有容器，使用
+```shell
+xx dps [dockername]
+```
+查看所有容器（运行中和停止的），dockername 支持镜像/容器名模糊搜索
+
+12、docker删除镜像及使用该镜像启动的容器，使用
+```shell
+xx drm [imageName]
+```
+删除镜像及使用该镜像启动的所有容器 ，imageName 支持模糊搜索
 
 ### k8s(参数为空且需要后续参数时使用"@"占位):
 1、查询namespace 命令，使用

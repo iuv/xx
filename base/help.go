@@ -12,52 +12,67 @@ var describe = `
 `
 var shell string = `
 shell: 
-  1. xx ip [port] 获取本地ip
-    示例结果：
-    Local IP: 172.16.112.12
-    HTTP Server: http://172.16.112.12
-    HTTP Server: http://172.16.112.12:8080
-    # 可选输出
-    HTTP Server: http://172.16.112.12:[port]
+  1. xx ip [port] 获取本地ip及公网ip(如果有外网)
+  示例结果：
+  Local IP: 172.16.112.12
+  HTTP Server: http://172.16.112.12
+  HTTP Server: http://172.16.112.12:8080
+  Public Network IP: 8.8.8.8
+  可选输出
+  HTTP Server: http://172.16.112.12:[port]
+
   2. xx ps [str] 获取进程，根据str模糊搜索，并高亮显示
 `
 var docker string = `
 docker(参数为空且需要后续参数时使用"@"占位):
-  1、查询docker日志命令，使用
+  1、运行docker命令，使用
+    xx dr [imageName] [containerName] [port]
+    默认使用后台进程启动 imageName 镜像名支持模糊搜索，containerName 设置容器名，port 映射的端口号
+    支持"8080:8080"和"8080"两种方式，其"8080"会自动补全为"8080:8080"
+
+  2、查询docker容器日志命令，使用
     xx dl [dockername] [lines]
-    查询容器输出日志，dockername 支持模糊搜索 ,lines 输出行数, 默认100行
-  
-  2、进入docker bash 命令，使用
+    查询容器输出日志，dockername 支持镜像/容器名模糊搜索 ,lines 输出行数, 默认100行
+
+  3、进入docker bash命令，使用
     xx de [dockername]
-    进入容器bash，dockername 支持模糊搜索
-  
-  3、启动docker 命令，使用
+    进入容器bash，dockername 支持镜像/容器名模糊搜索
+
+  4、启动docker容器命令，使用
     xx ds [dockername]
-    启动容器，dockername 支持模糊搜索
-  
-  4、重启docker 命令，使用
-    xx dr [dockername]
-    重新启动容器，dockername 支持模糊搜索
-  
-  5、停止docker 命令，使用
+    启动容器，dockername 支持镜像/容器名模糊搜索
+
+  5、重启docker 命令，使用
+    xx drs [dockername]
+    重新启动容器，dockername 支持镜像/容器名模糊搜索
+
+  6、停止docker 命令，使用
     xx dk [dockername]
-    停止容器，dockername 支持模糊搜索
+    停止容器，dockername 支持镜像/容器名模糊搜索
 
-  6、查找docker镜像，使用
-    xx di [dockername]
-    查找镜像，dockername 支持模糊搜索
+  7、查找docker镜像，使用
+    xx di [imageName]
+    查找镜像，imageName 支持模糊搜索
 
-  7、拉取docker镜像，使用
-    xx dpl [dockername]
-    拉取镜像，dockername，镜像全路径
+  8、拉取docker镜像，使用
+    xx dpl [imageName]
+    拉取镜像，imageName，镜像全路径
 
-  8、推送docker镜像，使用
-    xx dph [dockername]
-    推送镜像，dockername 支持模糊搜索
+  9、推送docker镜像，使用
+    xx dph [imageName]
+    推送镜像，imageName 支持模糊搜索
 
-  9、docker镜像打tag，使用
-    xx dt [dockername] [tagname]
-    镜像打tag，dockername 支持模糊搜索， tagname 需要打的tag名称
+  10、docker镜像打tag，使用
+    xx dt [imageName] [tagname]
+    镜像打tag，imageName 支持模糊搜索， tagname 需要打的tag名称
+
+  11、docker查看所有容器，使用
+    xx dps [dockername]
+    查看所有容器（运行中和停止的），dockername 支持镜像/容器名模糊搜索
+
+  12、docker删除镜像及使用该镜像启动的容器，使用
+    xx drm [imageName]
+    删除镜像及使用该镜像启动的所有容器 ，imageName 支持模糊搜索
 `
 var k8s = `
 k8s(参数为空且需要后续参数时使用"@"占位):
