@@ -51,13 +51,17 @@ func update() {
 	}
 	sys := base.Sys()
 	if sys == "mac"{
-		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx -O /tmp/xx")
+		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx -O /tmp/xxupdate")
 	} else if sys == "linux"{
-		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx -O /tmp/xx")
+		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx -O /tmp/xxupdate")
 	}
-	base.Execp("chmod 775 /tmp/xx")
-	base.Execp("sudo mv /tmp/xx /usr/local/bin")
-	base.Execp("chmod 775 /usr/local/bin/xx")
+	ret = base.Exec("ls /tmp")
+	if strings.Index(ret, "xxupdate") < 0{
+		base.Execp("mv /tmp/xxupdate /tmp/xx")
+		base.Execp("chmod 775 /tmp/xx")
+		base.Execp("sudo mv /tmp/xx /usr/local/bin")
+		base.Execp("chmod 775 /usr/local/bin/xx")
+	}
 }
 func setArg(args []string)(string,string,string,string,string){
 	a1,a2,a3,a4,a5 := "","","","",""
