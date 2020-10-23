@@ -49,10 +49,9 @@ func update() {
 	} else if sys == "linux"{
 		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx -O /tmp/xx")
 	}
-	base.Exec("cd /tmp")
 	base.Execp("chmod 775 /tmp/xx")
-	base.Execp("/tmp/xx install")
-	base.Exec("cd -")
+	base.Execp("sudo mv /tmp/xx /usr/local/bin")
+	base.Execp("chmod 775 /usr/local/bin/xx")
 }
 func setArg(args []string)(string,string,string,string,string){
 	a1,a2,a3,a4,a5 := "","","","",""
