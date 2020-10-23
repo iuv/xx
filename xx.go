@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 	"xx/base"
 	"xx/docker"
 	"xx/k8s"
@@ -43,6 +44,11 @@ func install()  {
 }
 // 更新
 func update() {
+	ret := base.Exec("curl https://jianpage.com/xx/")
+	if strings.Index(ret, base.Version) > 0 {
+		fmt.Println("It is already the latest version")
+		return
+	}
 	sys := base.Sys()
 	if sys == "mac"{
 		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx -O /tmp/xx")
