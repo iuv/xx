@@ -46,22 +46,17 @@ func install()  {
 func update() {
 	ret := base.Exec("curl https://jianpage.com/xx/")
 	if strings.Index(ret, base.Version) > 0 {
-		fmt.Println("It is already the latest version")
+		fmt.Println("The "+base.Version+" is already the latest version")
 		return
 	}
 	sys := base.Sys()
 	if sys == "mac"{
-		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx -O /tmp/xxupdate")
+		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx -O /tmp/xx")
 	} else if sys == "linux"{
-		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx -O /tmp/xxupdate")
+		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx -O /tmp/xx")
 	}
-	ret = base.Exec("ls /tmp")
-	if strings.Index(ret, "xxupdate") < 0{
-		base.Execp("mv /tmp/xxupdate /tmp/xx")
-		base.Execp("chmod 775 /tmp/xx")
-		base.Execp("sudo mv /tmp/xx /usr/local/bin")
-		base.Execp("chmod 775 /usr/local/bin/xx")
-	}
+	base.Execp("chmod 775 /tmp/xx")
+	base.Execp("/tmp/xx install")
 }
 func setArg(args []string)(string,string,string,string,string){
 	a1,a2,a3,a4,a5 := "","","","",""

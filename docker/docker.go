@@ -10,18 +10,18 @@ import (
 
 func Docker(cmd,a1,a2,a3 string){
 	switch cmd {
-	case "i": images(a1)
-	case "e": bash(a1)
-	case "l": logs(a1, a2)
-	case "s": start(a1)
-	case "rs": restart(a1)
-	case "k": stop(a1)
-	case "pl": pull(a1)
-	case "ph": push(a1)
-	case "t": tag(a1, a2)
+	case "i","images": images(a1)
+	case "e","exec": bash(a1)
+	case "l","log": logs(a1, a2)
+	case "s","start": start(a1)
+	case "rs","restart": restart(a1)
+	case "k","stop": stop(a1)
+	case "pl","pull": pull(a1)
+	case "ph","push": push(a1)
+	case "t","tag": tag(a1, a2)
 	case "rm": removeall(a1)
 	case "ps": psall(a1)
-	case "r": run(a1, a2, a3)
+	case "r","run": run(a1, a2, a3)
 	default: fmt.Println("command not found: d"+cmd)
 	}
 }
