@@ -51,12 +51,12 @@ func update() {
 	}
 	sys := base.Sys()
 	if sys == "mac"{
-		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx -O /tmp/xx")
+		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx")
 	} else if sys == "linux"{
-		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx -O /tmp/xx")
+		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx")
 	}
-	base.Execp("chmod 775 /tmp/xx")
-	base.Execp("/tmp/xx install")
+	base.Execp("chmod 775 xx")
+	base.Execp("./xx install")
 }
 func setArg(args []string)(string,string,string,string,string){
 	a1,a2,a3,a4,a5 := "","","","",""
