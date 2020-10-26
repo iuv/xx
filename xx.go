@@ -24,12 +24,8 @@ func main() {
 	default:
 		switch s{
 		case "ip": shell.Ip(a1)
-		case "v": base.V()
-		case "version": base.V()
-		case "-v": base.V()
-		case "h": base.Help(a1)
-		case "-h": base.Help(a1)
-		case "help": base.Help(a1)
+		case "v","version","-v": base.V()
+		case "h","-h","help": base.Help(a1)
 		case "ps": shell.Ps(a1)
 		case "install": install()
 		case "update": update()
