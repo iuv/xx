@@ -1,4 +1,4 @@
-# xx 简化命令工具 v1.3.4
+# xx 简化命令工具 v1.3.5
 本工具为简化常用shell、docker、kubernetes命令使用
 
 0.X版本使用python编写，需要运行环境支持py及需要sh脚本支持运行，为了解决运行环境依赖及保持单文件执行
@@ -37,6 +37,7 @@ xx drun [imageName] [containerName] [port]
 ```
 默认使用后台进程启动 imageName 镜像名支持模糊搜索，containerName 设置容器名，port 映射的端口号
 支持"8080:8080"和"8080"两种方式，其"8080"会自动补全为"8080:8080"
+
 2、查询docker容器日志命令，使用
 
 ```shell
@@ -121,6 +122,53 @@ xx dps [dockername]
 xx drm [imageName]
 ```
 删除镜像及使用该镜像启动的所有容器 ，imageName 支持模糊搜索
+
+13、docker本地-容器互相复制文件，使用
+```shell
+# 容器内文件复制到本地
+xx dc [dockerName]:[filePath] [localPath]
+# 本地文件复制到容器内
+xx dc [localPath] [dockerName]:[filePath]
+或
+# 容器内文件复制到本地
+xx dcp [dockerName]:[filePath] [localPath]
+# 本地文件复制到容器内
+xx dcp [localPath] [dockerName]:[filePath]
+```
+docker本地-容器互相复制文件 ，dockerName 容器名支持模糊搜索 filePath 容器内文件/文件夹路径 localPath 本地文件路径  eg: xx dc mysql:/tmp/a.sql .
+
+14、docker将镜像保存为本地文件，使用
+```shell
+xx dsa [imageName] [fileName]
+或
+xx dsave [imageName] [fileName]
+```
+docker将镜像保存为本地文件，imageName 支持模糊搜索 fileName 保存的文件名
+
+15、docker从本地文件导入镜像，使用
+```shell
+xx dlo [fileName]
+或
+xx dload [fileName]
+```
+docker从本地文件导入镜像，fileName 需要导入的文件名
+
+16、docker将运行的容器保存为镜像，使用
+```shell
+xx dco [dockerName] [imageName]
+或
+xx dcommit [dockerName] [imageName]
+```
+docker将运行的容器保存为镜像，dockerName 容器名称支持模糊搜索 imageName 保存的镜像名
+
+17、docker查看镜像创建历史，使用
+```shell
+xx dh [imageName]
+或
+xx dhistory [imageName]
+```
+docker查看镜像创建历史，imageName 镜像名支持模糊搜索
+
 
 ### k8s(参数为空且需要后续参数时使用"@"占位):
 1、查询namespace 命令，使用

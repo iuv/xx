@@ -22,6 +22,11 @@ func Docker(cmd,a1,a2,a3 string){
 	case "rm": removeall(a1)
 	case "ps": psall(a1)
 	case "r","run": run(a1, a2, a3)
+	case "c","cp": copy(a1, a2)
+	case "sa","save": save(a1, a2)
+	case "lo","load": load(a1)
+	case "co","commit": commit(a1, a2)
+	case "h","history": history(a1)
 	default: fmt.Println("command not found: d"+cmd)
 	}
 }
@@ -105,7 +110,7 @@ func pull(key string){
 
 // 停止容器
 func stop(key string)  {
-	name := findPsAllName(key)
+	name := findPsName(key)
 	if name == "" {
 		return
 	}
@@ -121,7 +126,7 @@ func stop(key string)  {
 }
 // 重启容器
 func restart(key string)  {
-	name := findPsAllName(key)
+	name := findPsName(key)
 	if name == ""{
 		return
 	}
@@ -153,7 +158,7 @@ func logs(key, line string)  {
 	if line == "" {
 		line = "100"
 	}
-	name := findPsAllName(key)
+	name := findPsName(key)
 	if name == "" {
 		return
 	}
@@ -163,16 +168,21 @@ func logs(key, line string)  {
 
 // 进入容器bash
 func bash(a1 string){
-	name := findPsAllName(a1)
+	name := findPsName(a1)
 	if name == "" {
 		return
 	}
 	cmd := "docker exec -it "+name+" /bin/bash"
 	base.Run(cmd)
 }
-// 查找相关容器名称
+// 查找相关所有容器名称
 func findPsAllName(key string) string{
 	cmd := "docker ps -a"
+	return findNameByCmd(key, cmd)
+}
+// 查找相关容器名称
+func findPsName(key string) string{
+	cmd := "docker ps"
 	return findNameByCmd(key, cmd)
 }
 // 查询镜像名称
@@ -255,4 +265,58 @@ func psall(a1 string){
 		ret = base.FindByKey(ret, a1)
 	}
 	fmt.Println(ret)
+}
+
+// 与容器复制文件
+func copy(a1, a2 string){
+	if(strings.Contains(a1, ":")){
+		a1 = copyBase(a1)
+	} else if(strings.Contains(a2, ":")){
+		a2 = copyBase(a2)
+	}
+	cmd := "docker cp "+a1+" "+a2
+	base.Run(cmd)
+}
+func copyBase(str string) string{
+	ss := strings.Split(str, ":")
+	ret := findPsName(ss[0])
+	str = ret+":"+ss[1]
+	return str
+}
+
+// 保存镜像到文件
+func save(a1, a2 string){
+	name := findImageName(a1)
+	if name == "" {
+		return
+	}
+	cmd := "docker save -o "+a2+" "+name
+	base.Run(cmd)
+}
+
+//  从文件加载镜像
+func load(a1 string){
+	if a1 == "" {
+		return
+	}
+	cmd := "docker load -i "+a1
+	base.Run(cmd)
+}
+// 将容器保存为镜像
+func commit(a1, a2 string){
+	a1 = findPsName(a1)
+	if a1 == "" {
+		return 
+	}
+	cmd := "docker commit "+a1+" "+a2
+	base.Run(cmd)
+}
+// 保存镜像到文件
+func history(a1 string){
+	name := findImageName(a1)
+	if name == "" {
+		return
+	}
+	cmd := "docker history "+name
+	base.Run(cmd)
 }

@@ -21,6 +21,7 @@ func main() {
 	switch s[0:1] {
 	case "d": docker.Docker(s[1:], a1, a2, a3)
 	case "k": k8s.K8s(s[1:], a1, a2, a3, a4)
+	case "s": shell.Shell(s[1:], a1, a2, a3, a4)
 	default:
 		switch s{
 		case "ip": shell.Ip(a1)
