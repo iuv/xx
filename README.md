@@ -326,7 +326,7 @@ xx kingressy [ingress] [namespace] [file]
 ```
 ingress名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
 
-20、保存service describe命令，使用
+20、保存service yaml命令，使用
 ```shell
 xx ksy [service] [namespace] [file]
 或
