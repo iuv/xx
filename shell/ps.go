@@ -2,9 +2,10 @@ package shell
 
 import (
 	"fmt"
-	"xx/base"
+	"github.com/iuv/xx/base"
 )
-func Ps(arg string){
+
+func Ps(arg string) {
 	var ret string
 	if arg != "" {
 		ret = base.Exec("ps -ef")
