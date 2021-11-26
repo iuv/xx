@@ -2,8 +2,8 @@ package base
 
 import "fmt"
 
-var Version string = "v1.3.5"
+var Version string = "v1.3.6"
 
-func V(){
+func V() {
 	fmt.Println(Version)
 }
