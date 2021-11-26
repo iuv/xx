@@ -44,6 +44,8 @@ func Docker(cmd, a1, a2, a3 string) {
 		commit(a1, a2)
 	case "h", "history":
 		history(a1)
+	case "b", "build":
+		build(a1)
 	default:
 		fmt.Println("command not found: d" + cmd)
 	}
@@ -255,7 +257,7 @@ func findNameByCmd(key string, cmd string) string {
 	var prompt survey.Prompt
 	if len(rs) <= base.SEL_LIMIT {
 		prompt = &survey.Select{
-			Message: "Choose a option:",
+			Message: "Choose one option:",
 			Options: rs,
 		}
 	} else {
@@ -351,4 +353,10 @@ func history(a1 string) {
 	}
 	cmd := "docker history " + name
 	base.Run(cmd)
+}
+
+// 构建
+func build(t string) {
+	startCmd := "docker build -t " + t + " ."
+	base.Run(startCmd)
 }

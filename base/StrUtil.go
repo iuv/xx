@@ -58,7 +58,7 @@ func FindColByKey(txt, key string, idx int) string {
 	var prompt survey.Prompt
 	if len(ps) <= SEL_LIMIT {
 		prompt = &survey.Select{
-			Message: "Choose a option:",
+			Message: "Choose one option:",
 			Options: ps,
 		}
 	} else {

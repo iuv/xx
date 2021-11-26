@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-var title string = "        xx 简化命令工具 "+Version
+var title string = "        xx 简化命令工具 " + Version
 var describe = `
 本工具为简化常用shell、docker、kubernetes命令使用
 有使用问题请访问https://github.com/iuv/xx 提交issues,
@@ -129,6 +129,11 @@ docker(参数为空且需要后续参数时使用"@"占位):
     或
     xx dhistory [imageName]
     docker查看镜像创建历史，imageName 镜像名支持模糊搜索
+  18、docker构建镜像(在Dockerfile所在目录下执行)
+	xx db [imageName]
+	或
+	xx dbuild [imageName]
+    docker构建镜像，在Dockerfile所在目录下执行，imageName为镜像名
 `
 var k8s = `
 k8s(参数为空且需要后续参数时使用"@"占位):
@@ -330,13 +335,17 @@ k8s(参数为空且需要后续参数时使用"@"占位):
     xx kcopy [pod] [namespace] [srcFile] [saveFile]
     pod名称支持模糊搜索，namespace 命名空间支持模糊, srcFile 容器中要复制的文件路径, saveFile 本地保存路径
 `
-func Help(key string){
+
+func Help(key string) {
 	fmt.Println(title)
 	fmt.Print(describe)
 	switch key {
-	case "shell": fmt.Print(shell)
-	case "docker": fmt.Print(docker)
-	case "k8s": fmt.Print(k8s)
+	case "shell":
+		fmt.Print(shell)
+	case "docker":
+		fmt.Print(docker)
+	case "k8s":
+		fmt.Print(k8s)
 	default:
 		fmt.Print(shell)
 		fmt.Print(docker)

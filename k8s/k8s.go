@@ -158,7 +158,13 @@ func logs(pod, namespace, lines string) {
 	}
 	pod, namespace = getResAndNamespace("pod", pod, namespace)
 	if pod != "" {
-		base.Run("kubectl logs --tail " + lines + " -f " + pod + " -n " + namespace)
+		cmd := "kubectl logs --tail " + lines + " -f " + pod + " -n " + namespace
+		// 查找容器（如果容器大于0）
+		container := findContainer(pod, namespace)
+		if container != "" {
+			cmd = cmd + " -c " + container
+		}
+		base.Run(cmd)
 	}
 }
 
@@ -169,8 +175,31 @@ func bash(pod, namespace, sh string) {
 	}
 	pod, namespace = getResAndNamespace("pod", pod, namespace)
 	if pod != "" {
-		base.Run("kubectl exec -it " + pod + " -n " + namespace + " -- " + sh)
+		cmd := "kubectl exec -it " + pod + " -n " + namespace
+		// 查找容器（如果容器大于0）
+		container := findContainer(pod, namespace)
+		if container != "" {
+			cmd = cmd + " -c " + container
+		}
+		cmd = cmd + " -- " + sh
+		base.Run(cmd)
 	}
+}
+
+// 查询pod中的容器 如果多个则选择一个返回 只有一个返回""
+func findContainer(pod, namespace string) string {
+	container := base.Execp("kubectl get pod " + pod + " -n " + namespace + " -o jsonpath={.spec.containers[*].name}")
+	containers := strings.Split(container, " ")
+	name := ""
+	if len(containers) > 1 {
+		var prompt survey.Prompt
+		prompt = &survey.Select{
+			Message: "Choose one container:",
+			Options: containers,
+		}
+		survey.AskOne(prompt, &name)
+	}
+	return name
 }
 
 // 模糊查询namespace
@@ -198,7 +227,7 @@ func findNamespace(key string) string {
 	var prompt survey.Prompt
 	if len(ns) <= base.SEL_LIMIT {
 		prompt = &survey.Select{
-			Message: "Choose a option:",
+			Message: "Choose one namespace:",
 			Options: ns,
 		}
 	} else {
@@ -246,7 +275,7 @@ func findResByKey(txt, key string, idx int) string {
 		var prompt survey.Prompt
 		if len(ps) <= base.SEL_LIMIT {
 			prompt = &survey.Select{
-				Message: "Choose a option:",
+				Message: "Choose one option:",
 				Options: ps,
 			}
 		} else {

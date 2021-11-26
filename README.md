@@ -169,6 +169,13 @@ xx dhistory [imageName]
 ```
 docker查看镜像创建历史，imageName 镜像名支持模糊搜索
 
+18、docker构建镜像(在Dockerfile所在目录下执行)
+```shell
+xx db [imageName]
+或
+xx dbuild [imageName]
+```
+docker构建镜像，在Dockerfile所在目录下执行，imageName为镜像名
 
 ### k8s(参数为空且需要后续参数时使用"@"占位):
 1、查询namespace 命令，使用
