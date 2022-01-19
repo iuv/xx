@@ -15,7 +15,9 @@
 
 > 国内用户可尝试使用以下加速链接：  
 > `wget https://gh.wget.cool/https:/raw.githubusercontent.com/iuv/xx/master/build/mac/xx`   
+> `wget https://gh.wget.cool/https:/raw.githubusercontent.com/iuv/xx/master/build/linux/xx`   
 > `wget https://cdn.jsdelivr.net/gh/iuv/xx@master/build/mac/xx`  
+> `wget https://cdn.jsdelivr.net/gh/iuv/xx@master/build/linux/xx`  
 
 ## 使用帮助如下：
 
