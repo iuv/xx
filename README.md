@@ -1,6 +1,8 @@
 [中文说明](https://github.com/iuv/xx/blob/master/README_ZH.md)
 
 # xx simplified command tool v1.3.7
+![License](https://img.shields.io/badge/license-MIT-4EB1BA)
+[![wiki](https://img.shields.io/badge/Document-Wiki-green)](http://blog.jisuye.com/xx)
 This tool simplifies the use of common shell, docker, and kubernetes commands
 
 The 0.X version is written in python, and the running environment needs to support py and the sh script to support running. In order to solve the running environment dependency and maintain single-file execution
