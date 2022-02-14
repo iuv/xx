@@ -1,450 +1,445 @@
-# xx 简化命令工具 v1.3.7
-本工具为简化常用shell、docker、kubernetes命令使用
+[中文说明](https://github.com/iuv/xx/blob/master/README_ZH.md)
 
-0.X版本使用python编写，需要运行环境支持py及需要sh脚本支持运行，为了解决运行环境依赖及保持单文件执行
+# xx simplified command tool v1.3.7
+This tool simplifies the use of common shell, docker, and kubernetes commands
 
-1.X及以后版本将使用go语言编写
+The 0.X version is written in python, and the running environment needs to support py and the sh script to support running. In order to solve the running environment dependency and maintain single-file execution
 
-如需要自己编译，可clone本仓库并运行build.sh脚本
-## 安装方法
-1. Mac使用 `wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx` 下载xx文件
-2. linux使用 `wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx` 下载xx文件
-3. 执行`chmod +x xx; ./xx install` 安装
-3. 可以使用 `xx` 命令了
-4. 更新使用 `xx update` 命令
+1.X and later versions will be written in go language
 
-> 国内用户可尝试使用以下加速链接：  
-> `wget https://gh.wget.cool/https:/raw.githubusercontent.com/iuv/xx/master/build/mac/xx`   
-> `wget https://gh.wget.cool/https:/raw.githubusercontent.com/iuv/xx/master/build/linux/xx`   
-> `wget https://cdn.jsdelivr.net/gh/iuv/xx@master/build/mac/xx`  
-> `wget https://cdn.jsdelivr.net/gh/iuv/xx@master/build/linux/xx`  
+If you need to compile it yourself, you can clone this repository and run the build.sh script
+## installation method
+1. Mac use `wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx` to download xx file
+2. linux uses `wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx` to download xx file
+3. Execute `chmod +x xx; ./xx install` to install
+3. You can use the `xx` command
+4. Update using `xx update` command
 
-## 使用帮助如下：
+## Use help as follows:
 
 ### shell:
-1. xx ip [port] 获取本地ip及公网ip(如果有外网)
-```
- 示例结果：
+1. xx ip [port] Get local ip and public network ip (if there is an external network)
+````
+ Example result:
  Local IP: 172.16.112.12
  HTTP Server: http://172.16.112.12
  HTTP Server: http://172.16.112.12:8080
  Public Network IP: 8.8.8.8
- 可选输出
+ optional output
  HTTP Server: http://172.16.112.12:[port]
-```
-2. xx ps [str] 获取进程，根据str模糊搜索，并高亮显示
+````
+2. xx ps [str] Get the process, fuzzy search according to str, and highlight
 
-### docker(参数为空且需要后续参数时使用"@"占位):
-1、运行docker命令，使用
+### docker (parameters are empty and use "@" placeholder when subsequent parameters are required):
+1. Run the docker command, use
 ```shell
 xx dr [imageName] [containerName] [port]
-或
+or
 xx drun [imageName] [containerName] [port]
-```
-默认使用后台进程启动 imageName 镜像名支持模糊搜索，containerName 设置容器名，port 映射的端口号
-支持"8080:8080"和"8080"两种方式，其"8080"会自动补全为"8080:8080"
+````
+By default, the background process is used to start the imageName image name supports fuzzy search, containerName sets the container name, port is the port number of the mapping
+Support "8080:8080" and "8080" two methods, "8080" will be automatically completed as "8080:8080"
 
-2、查询docker容器日志命令，使用
+2. To query the docker container log command, use
 
 ```shell
 xx dl [dockername] [lines]
-或
+or
 xx dlog [dockername] [lines]
-```
-查询容器输出日志，dockername 支持镜像/容器名模糊搜索 ,lines 输出行数, 默认100行
+````
+Query container output log, dockername supports image/container name fuzzy search, lines is the number of output lines, default 100 lines
 
-3、进入docker bash命令，使用
+3. Enter the docker bash command and use
 ```shell
 xx de [dockername]
-或
+or
 xx dexec [dockername]
-```
-进入容器bash，dockername 支持镜像/容器名模糊搜索
+````
+Enter the container bash, dockername supports image/container name fuzzy search
 
-4、启动docker容器命令，使用
+4. Start the docker container command, use
 ```shell
 xx ds [dockername]
-或
+or
 xx dstart [dockername]
-```
-启动容器，dockername 支持镜像/容器名模糊搜索
+````
+Start the container, dockername supports image/container name fuzzy search
 
-5、重启docker 命令，使用
+5. Restart the docker command and use
 ```shell
 xx drs [dockername]
-或
+or
 xx drestart [dockername]
-```
-重新启动容器，dockername 支持镜像/容器名模糊搜索
+````
+Restart the container, dockername supports image/container name fuzzy search
 
-6、停止docker 命令，使用
+6. Stop the docker command and use
 ```shell
 xx dk [dockername]
-或
+or
 xx dstop [dockername]
-```
-停止容器，dockername 支持镜像/容器名模糊搜索
+````
+Stop the container, dockername supports image/container name fuzzy search
 
-7、查找docker镜像，使用
+7. Find the docker image and use
 ```shell
 xx di [imageName]
-或
+or
 xx dimages [imageName]
-```
-查找镜像，imageName 支持模糊搜索
+````
+Find images, imageName supports fuzzy search
 
-8、拉取docker镜像，使用
+8. Pull the docker image and use
 ```shell
 xx dpl [imageName]
-或
+or
 xx dpull [imageName]
-```
-拉取镜像，imageName，镜像全路径
+````
+Pull image, imageName, image full path
 
-9、推送docker镜像，使用
+9. Push the docker image and use
 ```shell
 xx dph [imageName]
-或
+or
 xx dpush [imageName]
-```
-推送镜像，imageName 支持模糊搜索
+````
+Push image, imageName supports fuzzy search
 
-10、docker镜像打tag，使用
+10. Tag the docker image and use
 ```shell
 xx dt [imageName] [tagname]
-或
+or
 xx dtag [imageName] [tagname]
-```
-镜像打tag，imageName 支持模糊搜索， tagname 需要打的tag名称
+````
+Image tagging, imageName supports fuzzy search, tagname is the name of the tag that needs to be tagged
 
-11、docker查看所有容器，使用
+11, docker view all containers, use
 ```shell
 xx dps [dockername]
-```
-查看所有容器（运行中和停止的），dockername 支持镜像/容器名模糊搜索
+````
+View all containers (running and stopped), dockername supports image/container name fuzzy search
 
-12、docker删除镜像及使用该镜像启动的容器，使用
+12. Docker deletes the image and the container started using the image, using
 ```shell
 xx drm [imageName]
-```
-删除镜像及使用该镜像启动的所有容器 ，imageName 支持模糊搜索
+````
+Delete the image and all containers started using the image, imageName supports fuzzy search
 
-13、docker本地-容器互相复制文件，使用
+13. Docker local-containers copy files to each other, use
 ```shell
-# 容器内文件复制到本地
+# Copy the files in the container to the local
 xx dc [dockerName]:[filePath] [localPath]
-# 本地文件复制到容器内
+# Copy local files to the container
 xx dc [localPath] [dockerName]:[filePath]
-或
-# 容器内文件复制到本地
+or
+# Copy the files in the container to the local
 xx dcp [dockerName]:[filePath] [localPath]
-# 本地文件复制到容器内
+# Copy local files to the container
 xx dcp [localPath] [dockerName]:[filePath]
-```
-docker本地-容器互相复制文件 ，dockerName 容器名支持模糊搜索 filePath 容器内文件/文件夹路径 localPath 本地文件路径  eg: xx dc mysql:/tmp/a.sql .
+````
+Docker local-containers copy files to each other, dockerName container name supports fuzzy search filePath container file/folder path localPath local file path eg: xx dc mysql:/tmp/a.sql .
 
-14、docker将镜像保存为本地文件，使用
+14. Docker saves the image as a local file and uses
 ```shell
 xx dsa [imageName] [fileName]
-或
+or
 xx dsave [imageName] [fileName]
-```
-docker将镜像保存为本地文件，imageName 支持模糊搜索 fileName 保存的文件名
+````
+Docker saves the image as a local file, imageName supports fuzzy search for the file name saved by fileName
 
-15、docker从本地文件导入镜像，使用
+15. Docker imports images from local files, using
 ```shell
 xx dlo [fileName]
-或
+or
 xx dload [fileName]
-```
-docker从本地文件导入镜像，fileName 需要导入的文件名
+````
+Docker imports images from local files, fileName is the file name to be imported
 
-16、docker将运行的容器保存为镜像，使用
+16. Docker saves the running container as an image, using
 ```shell
 xx dco [dockerName] [imageName]
-或
+or
 xx dcommit [dockerName] [imageName]
-```
-docker将运行的容器保存为镜像，dockerName 容器名称支持模糊搜索 imageName 保存的镜像名
+````
+Docker saves the running container as an image, dockerName container name supports fuzzy search imageName saved image name
 
-17、docker查看镜像创建历史，使用
+17, docker view the image creation history, use
 ```shell
 xx dh [imageName]
-或
+or
 xx dhistory [imageName]
-```
-docker查看镜像创建历史，imageName 镜像名支持模糊搜索
+````
+docker view the image creation history, imageName image name supports fuzzy search
 
-18、docker构建镜像(在Dockerfile所在目录下执行)
+18. Docker builds the image (execute in the directory where the Dockerfile is located)
 ```shell
 xx db [imageName]
-或
+or
 xx dbuild [imageName]
-```
-docker构建镜像，在Dockerfile所在目录下执行，imageName为镜像名
+````
+Docker builds an image and executes it in the directory where the Dockerfile is located. imageName is the image name
 
-### k8s(参数为空且需要后续参数时使用"@"占位):
-1、查询namespace 命令，使用
+### k8s ("@" is used when the parameter is empty and subsequent parameters are required):
+1. Query the namespace command, use
 ```shell
 xx kn [keyword]
-或
+or
 xx kns [keyword]
-或
+or
 xx knamespace [keyword]
-```
-keyword 支持模糊搜索
+````
+keyword supports fuzzy search
 
-2、查询pod 命令，使用
+2. To query the pod command, use
 ```shell
 xx kp [keyword] [namespace]
-或
+or
 xx kpod [keyword] [namespace]
-```
-keyword 模糊匹配pod，如要查询全部 namespace 命名空间支持模糊匹配
+````
+keyword Fuzzy matching pod, if you want to query all namespace namespaces support fuzzy matching
 
-3、进入pod bash 命令，使用
+3. Enter the pod bash command and use
 ```shell
 xx ke [pod] [namespace] [sh]
-或
+or
 xx kexe [pod] [namespace] [sh]
-```
-登入pod bash，pod pod名称支持模糊搜索，namespace 所属命名空间支持模糊, sh 默认为bash,有特殊可传入（/bin/目录下）
+````
+Log in to pod bash, the pod pod name supports fuzzy search, the namespace to which the namespace belongs supports fuzzy search, sh defaults to bash, and there are special ones that can be passed in (under /bin/ directory)
 
-4、查询pod 日志命令，使用
+4. To query the pod log command, use
 ```shell
 xx kl [pod] [namespace] [lines]
-或
+or
 xx klog [pod] [namespace] [lines]
-```
-查询pod日志，pod名称支持模糊搜索，namespace 所属命名空间支持模糊, lines 输出行数，默认100行
+````
+Query the pod log, the pod name supports fuzzy search, the namespace to which the namespace belongs supports fuzzy search, lines is the number of output lines, the default is 100 lines
 
-5、查询deployments 命令，使用
+5. Query the deployments command, use
 ```shell
 xx kd [deployment] [namespace]
-或
+or
 xx kdeployment [deployment] [namespace]
-```
-deployment 名称支持模糊，namespace 命名空间支持模糊
+````
+Deployment name supports ambiguity, namespace namespace supports ambiguity
 
-6、查询ingress 命令，使用
+6. Query the ingress command, use
 ```shell
 xx ki [ingress] [namespace]
-或
+or
 xx kingress [ingress] [namespace]
-```
-ingress 名称支持模糊，namespace 命名空间支持模糊
+````
+ingress name supports ambiguity, namespace namespace supports ambiguity
 
-7、查询service 命令，使用
+7. Query the service command, use
 ```shell
 xx ks [service] [namespace]
-或
+or
 xx kservice [service] [namespace]
-```
-service名称支持模糊，namespace 命名空间支持模糊
+````
+Service name supports ambiguity, namespace namespace supports ambiguity
 
-8、查询configmap 命令，使用
+8. Query the configmap command, use
 ```shell
 xx kc [configmap] [namespace]
-或
+or
 xx kconfigmap [configmap] [namespace]
-```
-configmap名称支持模糊，namespace 命名空间支持模糊
+````
+configmap names support ambiguity, namespace namespaces support ambiguity
 
-9、查询secret 命令，使用
+9. To query the secret command, use
 ```shell
 xx ksec [secret] [namespace]
-或
+or
 xx ksecret [secret] [namespace]
-```
-secret名称支持模糊，namespace 命名空间支持模糊
+````
+The secret name supports ambiguity, and the namespace namespace supports ambiguity
 
-10、查询statefulset 命令，使用
+10. To query the statefulset command, use
 ```shell
 xx kss [statefulset] [namespace]
-或
+or
 xx kstatefulset [statefulset] [namespace]
-```
-statefulset名称支持模糊，namespace 命名空间支持模糊
+````
+Statefulset names support ambiguity, namespace namespaces support ambiguity
 
-
-11、查询pod describe命令，使用
+11. To query the pod describe command, use
 ```shell
 xx kpd [pod] [namespace]
-或
+or
 xx kpodd [pod] [namespace]
-```
-pod名称支持模糊搜索，namespace 命名空间支持模糊
+````
+pod name supports fuzzy search, namespace namespace supports fuzzy search
 
-12、查询ingress describe命令，使用
+12. To query the ingress describe command, use
 ```shell
 xx kid [ingress] [namespace]
-或
+or
 xx kingressd [ingress] [namespace]
-```
-ingress名称支持模糊搜索，namespace 命名空间支持模糊
+````
+ingress name supports fuzzy search, namespace namespace supports fuzzy search
 
-13、查询service describe命令，使用
+13. To query the service describe command, use
 ```shell
 xx ksd [service] [namespace]
-或
+or
 xx kserviced [service] [namespace]
-```
-service名称支持模糊搜索，namespace 命名空间支持模糊
+````
+The service name supports fuzzy search, and the namespace namespace supports fuzzy search
 
-14、查询deployment describe命令，使用
+14. To query the deployment describe command, use
 ```shell
 xx kdd [deployment] [namespace]
-或
+or
 xx kdeploymentd [deployment] [namespace]
-```
-deployment名称支持模糊搜索，namespace 命名空间支持模糊
+````
+The deployment name supports fuzzy search, and the namespace namespace supports fuzzy search
 
-15、查询configmap describe命令，使用
+15. To query the configmap describe command, use
 ```shell
 xx kcd [configmap] [namespace]
-或
+or
 xx kconfigmapd [configmap] [namespace]
-```
-configmap名称支持模糊搜索，namespace 命名空间支持模糊
+````
+configmap name supports fuzzy search, namespace namespace supports fuzzy
 
-16、查询secret describe命令，使用
+16. To query the secret describe command, use
 ```shell
 xx ksecd [secret] [namespace]
-或
+or
 xx ksecretd [secret] [namespace]
-```
-secret名称支持模糊搜索，namespace 命名空间支持模糊
+````
+The secret name supports fuzzy search, and the namespace namespace supports fuzzy search
 
-17、查询statefulset describe命令，使用
+17. To query the statefulset describe command, use
 ```shell
 xx kssd [statefulset] [namespace]
-或
+or
 xx kstatefulsetd [statefulset] [namespace]
-```
-statefulset名称支持模糊搜索，namespace 命名空间支持模糊
+````
+The statefulset name supports fuzzy search, and the namespace namespace supports fuzzy search
 
-18、保存pod yaml命令，使用
+18. Save the pod yaml command and use
 ```shell
 xx kpy [pod] [namespace] [file]
-或
+or
 xx kpody [pod] [namespace] [file]
-```
-pod名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
+````
+Pod name supports fuzzy search, namespace namespace supports fuzzy, file is saved to file name
 
-19、保存ingress yaml命令，使用
+19. Save the ingress yaml command and use
 ```shell
 xx kiy [ingress] [namespace] [file]
-或
+or
 xx kingressy [ingress] [namespace] [file]
-```
-ingress名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
+````
+ingress name supports fuzzy search, namespace namespace supports fuzzy, file is saved to file name
 
-20、保存service yaml命令，使用
+20. Save the service yaml command and use
 ```shell
 xx ksy [service] [namespace] [file]
-或
+or
 xx kservicey [service] [namespace] [file]
-```
-service名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
+````
+The service name supports fuzzy search, the namespace namespace supports fuzzy search, and the file is saved to the file name
 
-21、保存deployment yaml命令，使用
+21. Save the deployment yaml command and use
 ```shell
 xx kdy [deployment] [namespace] [file]
-或
+or
 xx kdeploymenty [deployment] [namespace] [file]
-```
-deployment名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
+````
+The deployment name supports fuzzy search, the namespace namespace supports fuzzy search, and the file is saved to the file name
 
-22、保存configmap yaml命令，使用
+22. Save the configmap yaml command and use
 ```shell
 xx kcy [configmap] [namespace] [file]
-或
+or
 xx kconfigmapy [configmap] [namespace] [file]
-```
-configmap名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
+````
+configmap name supports fuzzy search, namespace namespace supports fuzzy, file is saved to file name
 
-23、保存secret yaml命令，使用
+23. Save the secret yaml command and use
 ```shell
 xx ksecy [secret] [namespace] [file]
-或
+or
 xx ksecrety [secret] [namespace] [file]
-```
-secret名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
+````
+The secret name supports fuzzy search, the namespace namespace supports fuzzy search, and the file is saved to the file name
 
-24、保存statefulset yaml命令，使用
+24. Save the statefulset yaml command and use
 ```shell
 xx kssy [statefulset] [namespace] [file]
-或
+or
 xx kstatefulsety [statefulset] [namespace] [file]
-```
-statefulset名称支持模糊搜索，namespace 命名空间支持模糊，file 保存到文件名
+````
+Statefulset name supports fuzzy search, namespace namespace supports fuzzy, file is saved to filename
   
-25、 删除pod命令，使用
+25. To delete the pod command, use
 ```shell
 xx kpdel [pod] [namespace]
-或
+or
 xx kpoddel [pod] [namespace]
-```
-pod名称支持模糊搜索，namespace 命名空间支持模糊
+````
+pod name supports fuzzy search, namespace namespace supports fuzzy search
 
-26、查询ingress命令，使用
+26. To query the ingress command, use
 ```shell
 xx kidel [ingress] [namespace]
-或
+or
 xx kingressdel [ingress] [namespace]
-```
-ingress名称支持模糊搜索，namespace 命名空间支持模糊
+````
+ingress name supports fuzzy search, namespace namespace supports fuzzy search
 
-27、删除service命令，使用
+27, delete the service command, use
 ```shell
 xx ksdel [service] [namespace]
-或
+or
 xx kservicedel [service] [namespace]
-```
-service名称支持模糊搜索，namespace 命名空间支持模糊
+````
+The service name supports fuzzy search, and the namespace namespace supports fuzzy search
 
-28、删除deployment命令，使用
+28, delete the deployment command, use
 ```shell
 xx kddel [deployment] [namespace]
-或
+or
 xx kdeploymentdel [deployment] [namespace]
-```
-deployment名称支持模糊搜索，namespace 命名空间支持模糊
+````
+The deployment name supports fuzzy search, and the namespace namespace supports fuzzy search
 
-29、删除configmap命令，使用
+29, delete the configmap command, use
 ```shell
 xx kcdel [configmap] [namespace]
-或
+or
 xx kconfigmapdel [configmap] [namespace]
-```
-configmap名称支持模糊搜索，namespace 命名空间支持模糊
+````
+configmap name supports fuzzy search, namespace namespace supports fuzzy
 
-30、删除secret命令，使用
+30. Delete the secret command and use
 ```shell
 xx ksecdel [secret] [namespace]
-或
+or
 xx ksecretdel [secret] [namespace]
-```
-secret名称支持模糊搜索，namespace 命名空间支持模糊
+````
+The secret name supports fuzzy search, and the namespace namespace supports fuzzy search
 
-31、删除statefulset命令，使用
+31. Delete the statefulset command and use
 ```shell
 xx kssdel [statefulset] [namespace]
-或
+or
 xx kstatefulsetdel [statefulset] [namespace]
-```
-statefulset名称支持模糊搜索，namespace 命名空间支持模糊
+````
+The statefulset name supports fuzzy search, and the namespace namespace supports fuzzy search
 
-32、应用yaml配置文件命令，使用
+32. Apply the yaml configuration file command, use
 ```shell
 xx ka [file]
-或
+or
 xx kapply [file]
-```
-file yaml配置文件
+````
+file yaml configuration file
 
-33、从pod容器中复制文件命令，使用
+33. To copy the file command from the pod container, use
 ```shell
 xx kcopy [pod] [namespace] [srcFile] [saveFile]
-```
-pod名称支持模糊搜索，namespace 命名空间支持模糊, srcFile 容器中要复制的文件路径, saveFile 本地保存路径
+````
+Pod name supports fuzzy search, namespace namespace supports fuzzy search, srcFile is the path of the file to be copied in the container, saveFile is the local save path
