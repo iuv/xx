@@ -10,8 +10,14 @@
 1. Mac使用 `wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx` 下载xx文件
 2. linux使用 `wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx` 下载xx文件
 3. 执行`chmod +x xx; ./xx install` 安装
-3. 可以使用 `xx` 命令了
-4. 更新使用 `xx update` 命令
+4. 可以使用 `xx` 命令了
+5. 更新使用 `xx update` 命令
+
+> 国内用户可尝试使用以下加速链接：  
+> `wget https://gh.wget.cool/https:/raw.githubusercontent.com/iuv/xx/master/build/mac/xx`   
+> `wget https://gh.wget.cool/https:/raw.githubusercontent.com/iuv/xx/master/build/linux/xx`   
+> `wget https://cdn.jsdelivr.net/gh/iuv/xx@master/build/mac/xx`  
+> `wget https://cdn.jsdelivr.net/gh/iuv/xx@master/build/linux/xx`
 
 ## 使用帮助如下：
 
