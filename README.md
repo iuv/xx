@@ -21,7 +21,7 @@ If you need to compile it yourself, you can clone this repository and run the bu
 
 ## Use help as follows:
 
-![help](https://github.com/iuv/xx/blob/master/xx.svg?sanitize=true)
+![help](https://raw.githubusercontent.com/iuv/xx/master/xx.svg?sanitize=true)
 
 ### shell:
 1. xx ip [port] Get local ip and public network ip (if there is an external network)

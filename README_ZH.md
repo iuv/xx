@@ -25,7 +25,7 @@
 
 ## 使用帮助如下：
 
-![help](https://github.com/iuv/xx/blob/master/xx_zh.svg?sanitize=true)
+![help](https://raw.githubusercontent.com/iuv/xx/master/xx_zh.svg?sanitize=true)
 
 ### shell:
 1. xx ip [port] 获取本地ip及公网ip(如果有外网)
