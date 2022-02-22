@@ -33,6 +33,8 @@ func main() {
 			base.V()
 		case "h", "-h", "help":
 			base.Help(a1)
+		case "zh":
+			base.HelpZh(a1)
 		case "ps":
 			shell.Ps(a1)
 		case "install":

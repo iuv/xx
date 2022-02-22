@@ -1,4 +1,4 @@
-# xx 简化命令工具 v1.3.7
+# xx 简化命令工具 v1.3.8
 ![License](https://img.shields.io/badge/license-MIT-4EB1BA)
 [![wiki](https://img.shields.io/badge/Document-Wiki-green)](http://blog.jisuye.com/xx)
 
@@ -15,6 +15,7 @@
 3. 执行`chmod +x xx; ./xx install` 安装
 4. 可以使用 `xx` 命令了
 5. 更新使用 `xx update` 命令
+6. 使用 `xx h` 获取帮助, `xx zh` 获取中文帮助
 
 > 国内用户可尝试使用以下加速链接：  
 > `wget https://gh.wget.cool/https:/raw.githubusercontent.com/iuv/xx/master/build/mac/xx`   
@@ -23,6 +24,8 @@
 > `wget https://cdn.jsdelivr.net/gh/iuv/xx@master/build/linux/xx`
 
 ## 使用帮助如下：
+
+![help](https://github.com/iuv/xx/blob/master/xx_zh.svg?sanitize=true)
 
 ### shell:
 1. xx ip [port] 获取本地ip及公网ip(如果有外网)
@@ -189,21 +192,21 @@ docker构建镜像，在Dockerfile所在目录下执行，imageName为镜像名
 ### k8s(参数为空且需要后续参数时使用"@"占位):
 1、查询namespace 命令，使用
 ```shell
-xx kn [keyword]
+xx kn [namespace]
 或
-xx kns [keyword]
+xx kns [namespace]
 或
-xx knamespace [keyword]
+xx knamespace [namespace]
 ```
-keyword 支持模糊搜索
+namespace 支持模糊搜索
 
 2、查询pod 命令，使用
 ```shell
-xx kp [keyword] [namespace]
+xx kp [pod] [namespace]
 或
-xx kpod [keyword] [namespace]
+xx kpod [pod] [namespace]
 ```
-keyword 模糊匹配pod，如要查询全部 namespace 命名空间支持模糊匹配
+pod 模糊匹配pod，如要查询全部 namespace 命名空间支持模糊匹配
 
 3、进入pod bash 命令，使用
 ```shell
@@ -390,7 +393,7 @@ xx kpoddel [pod] [namespace]
 ```
 pod名称支持模糊搜索，namespace 命名空间支持模糊
 
-26、查询ingress命令，使用
+26、删除ingress命令，使用
 ```shell
 xx kidel [ingress] [namespace]
 或

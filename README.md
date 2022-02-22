@@ -1,6 +1,6 @@
 [中文说明](https://github.com/iuv/xx/blob/master/README_ZH.md)
 
-# xx simplified command tool v1.3.7
+# xx simplified command tool v1.3.8
 ![License](https://img.shields.io/badge/license-MIT-4EB1BA)
 [![wiki](https://img.shields.io/badge/Document-Wiki-green)](http://blog.jisuye.com/xx)
 
@@ -15,10 +15,13 @@ If you need to compile it yourself, you can clone this repository and run the bu
 1. Mac use `wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx` to download xx file
 2. linux uses `wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx` to download xx file
 3. Execute `chmod +x xx; ./xx install` to install
-3. You can use the `xx` command
-4. Update using `xx update` command
+4. You can use the `xx` command
+5. Update using `xx update` command
+6. Use `xx h` for help, `xx zh` for Chinese help
 
 ## Use help as follows:
+
+![help](https://github.com/iuv/xx/blob/master/xx.svg?sanitize=true)
 
 ### shell:
 1. xx ip [port] Get local ip and public network ip (if there is an external network)
@@ -36,119 +39,119 @@ If you need to compile it yourself, you can clone this repository and run the bu
 ### docker (parameters are empty and use "@" placeholder when subsequent parameters are required):
 1. Run the docker command, use
 ```shell
-xx dr [imageName] [containerName] [port]
+xx dr [image] [container] [port]
 or
-xx drun [imageName] [containerName] [port]
+xx drun [image] [container] [port]
 ````
-By default, the background process is used to start the imageName image name supports fuzzy search, containerName sets the container name, port is the port number of the mapping
+By default, the background process is used to start the docker image name supports fuzzy search, container sets the container name, port is the port number of the mapping
 Support "8080:8080" and "8080" two methods, "8080" will be automatically completed as "8080:8080"
 
 2. To query the docker container log command, use
 
 ```shell
-xx dl [dockername] [lines]
+xx dl [container] [lines]
 or
-xx dlog [dockername] [lines]
+xx dlog [container] [lines]
 ````
-Query container output log, dockername supports image/container name fuzzy search, lines is the number of output lines, default 100 lines
+Query container output log, container supports image/container name fuzzy search, lines is the number of output lines, default 100 lines
 
 3. Enter the docker bash command and use
 ```shell
-xx de [dockername]
+xx de [container]
 or
-xx dexec [dockername]
+xx dexec [container]
 ````
-Enter the container bash, dockername supports image/container name fuzzy search
+Enter the container bash, container supports image/container name fuzzy search
 
 4. Start the docker container command, use
 ```shell
-xx ds [dockername]
+xx ds [container]
 or
-xx dstart [dockername]
+xx dstart [container]
 ````
-Start the container, dockername supports image/container name fuzzy search
+Start the container, container supports image/container name fuzzy search
 
 5. Restart the docker command and use
 ```shell
-xx drs [dockername]
+xx drs [container]
 or
-xx drestart [dockername]
+xx drestart [container]
 ````
-Restart the container, dockername supports image/container name fuzzy search
+Restart the container, container supports image/container name fuzzy search
 
-6. Stop the docker command and use
+6. Stop the container command and use
 ```shell
-xx dk [dockername]
+xx dk [container]
 or
-xx dstop [dockername]
+xx dstop [container]
 ````
-Stop the container, dockername supports image/container name fuzzy search
+Stop the container, container supports image/container name fuzzy search
 
 7. Find the docker image and use
 ```shell
-xx di [imageName]
+xx di [image]
 or
-xx dimages [imageName]
+xx dimages [image]
 ````
-Find images, imageName supports fuzzy search
+Find images, image supports fuzzy search
 
 8. Pull the docker image and use
 ```shell
-xx dpl [imageName]
+xx dpl [imageFullPath]
 or
-xx dpull [imageName]
+xx dpull [imageFullPath]
 ````
-Pull image, imageName, image full path
+Pull image, image full path
 
 9. Push the docker image and use
 ```shell
-xx dph [imageName]
+xx dph [image]
 or
-xx dpush [imageName]
+xx dpush [image]
 ````
-Push image, imageName supports fuzzy search
+Push image, image supports fuzzy search
 
-10. Tag the docker image and use
+10. Set tag of the docker image and use
 ```shell
-xx dt [imageName] [tagname]
+xx dt [image] [tag]
 or
-xx dtag [imageName] [tagname]
+xx dtag [image] [tag]
 ````
-Image tagging, imageName supports fuzzy search, tagname is the name of the tag that needs to be tagged
+Image tagging, image supports fuzzy search, tag is the name of the tag that needs to be tagged
 
 11, docker view all containers, use
 ```shell
-xx dps [dockername]
+xx dps [container]
 ````
-View all containers (running and stopped), dockername supports image/container name fuzzy search
+View all containers (running and stopped), container supports image/container name fuzzy search
 
 12. Docker deletes the image and the container started using the image, using
 ```shell
-xx drm [imageName]
+xx drm [image]
 ````
-Delete the image and all containers started using the image, imageName supports fuzzy search
+Delete the image and all containers started using the image, image supports fuzzy search
 
 13. Docker local-containers copy files to each other, use
 ```shell
 # Copy the files in the container to the local
-xx dc [dockerName]:[filePath] [localPath]
+xx dc [container]:[filePath] [localPath]
 # Copy local files to the container
-xx dc [localPath] [dockerName]:[filePath]
+xx dc [localPath] [container]:[filePath]
 or
 # Copy the files in the container to the local
-xx dcp [dockerName]:[filePath] [localPath]
+xx dcp [container]:[filePath] [localPath]
 # Copy local files to the container
-xx dcp [localPath] [dockerName]:[filePath]
+xx dcp [localPath] [container]:[filePath]
 ````
-Docker local-containers copy files to each other, dockerName container name supports fuzzy search filePath container file/folder path localPath local file path eg: xx dc mysql:/tmp/a.sql .
+Docker local-containers copy files to each other, container name supports fuzzy search filePath container file/folder path localPath local file path eg: xx dc mysql:/tmp/a.sql .
 
 14. Docker saves the image as a local file and uses
 ```shell
-xx dsa [imageName] [fileName]
+xx dsa [image] [fileName]
 or
-xx dsave [imageName] [fileName]
+xx dsave [image] [fileName]
 ````
-Docker saves the image as a local file, imageName supports fuzzy search for the file name saved by fileName
+Docker saves the image as a local file, image supports fuzzy search for the file name saved by fileName
 
 15. Docker imports images from local files, using
 ```shell
@@ -160,46 +163,46 @@ Docker imports images from local files, fileName is the file name to be imported
 
 16. Docker saves the running container as an image, using
 ```shell
-xx dco [dockerName] [imageName]
+xx dco [container] [image]
 or
-xx dcommit [dockerName] [imageName]
+xx dcommit [container] [image]
 ````
-Docker saves the running container as an image, dockerName container name supports fuzzy search imageName saved image name
+Docker saves the running container as an image, container name supports fuzzy search image saved image name
 
 17, docker view the image creation history, use
 ```shell
-xx dh [imageName]
+xx dh [image]
 or
-xx dhistory [imageName]
+xx dhistory [image]
 ````
-docker view the image creation history, imageName image name supports fuzzy search
+docker view the image creation history, image image name supports fuzzy search
 
 18. Docker builds the image (execute in the directory where the Dockerfile is located)
 ```shell
-xx db [imageName]
+xx db [image]
 or
-xx dbuild [imageName]
+xx dbuild [image]
 ````
-Docker builds an image and executes it in the directory where the Dockerfile is located. imageName is the image name
+Docker builds an image and executes it in the directory where the Dockerfile is located. image is the image name
 
 ### k8s ("@" is used when the parameter is empty and subsequent parameters are required):
 1. Query the namespace command, use
 ```shell
-xx kn [keyword]
+xx kn [namespace]
 or
-xx kns [keyword]
+xx kns [namespace]
 or
-xx knamespace [keyword]
+xx knamespace [namespace]
 ````
-keyword supports fuzzy search
+namespace supports fuzzy search
 
 2. To query the pod command, use
 ```shell
-xx kp [keyword] [namespace]
+xx kp [pod] [namespace]
 or
-xx kpod [keyword] [namespace]
+xx kpod [pod] [namespace]
 ````
-keyword Fuzzy matching pod, if you want to query all namespace namespaces support fuzzy matching
+pod Fuzzy matching pod, if you want to query all namespace namespaces support fuzzy matching
 
 3. Enter the pod bash command and use
 ```shell
@@ -377,7 +380,7 @@ xx kstatefulsety [statefulset] [namespace] [file]
 ````
 Statefulset name supports fuzzy search, namespace namespace supports fuzzy, file is saved to filename
   
-25. To delete the pod command, use
+25. Delete the pod command, use
 ```shell
 xx kpdel [pod] [namespace]
 or
@@ -385,7 +388,7 @@ xx kpoddel [pod] [namespace]
 ````
 pod name supports fuzzy search, namespace namespace supports fuzzy search
 
-26. To query the ingress command, use
+26. Delete the ingress command, use
 ```shell
 xx kidel [ingress] [namespace]
 or
@@ -393,7 +396,7 @@ xx kingressdel [ingress] [namespace]
 ````
 ingress name supports fuzzy search, namespace namespace supports fuzzy search
 
-27, delete the service command, use
+27, Delete the service command, use
 ```shell
 xx ksdel [service] [namespace]
 or
