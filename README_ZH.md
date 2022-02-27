@@ -23,6 +23,9 @@
 > `wget https://cdn.jsdelivr.net/gh/iuv/xx@master/build/mac/xx`  
 > `wget https://cdn.jsdelivr.net/gh/iuv/xx@master/build/linux/xx`
 
+## 使用示例
+![demo](https://raw.githubusercontent.com/iuv/xx/master/demo.gif?sanitize=true)
+
 ## 使用帮助如下：
 
 ![help](https://raw.githubusercontent.com/iuv/xx/master/xx_zh.svg?sanitize=true)

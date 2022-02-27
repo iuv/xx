@@ -11,6 +11,8 @@ The 0.X version is written in python, and the running environment needs to suppo
 1.X and later versions will be written in go language
 
 If you need to compile it yourself, you can clone this repository and run the build.sh script
+## demo
+![demo](https://raw.githubusercontent.com/iuv/xx/master/demo.gif?sanitize=true)
 ## installation method
 1. Mac use `wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx` to download xx file
 2. linux uses `wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx` to download xx file
