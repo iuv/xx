@@ -1,4 +1,4 @@
-# xx 简化命令工具 v1.3.8
+# xx 简化命令工具 v1.3.9
 ![License](https://img.shields.io/badge/license-MIT-4EB1BA)
 [![wiki](https://img.shields.io/badge/Document-Wiki-green)](http://blog.jisuye.com/xx)
 
@@ -10,18 +10,18 @@
 
 如需要自己编译，可clone本仓库并运行build.sh脚本
 ## 安装方法
-1. Mac使用 `wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx` 下载xx文件
-2. linux使用 `wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx` 下载xx文件
+1. Mac使用 `wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/x86/xx` 下载xx文件(x86、arm64)
+2. linux使用 `wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/x86/xx` 下载xx文件(x86、arm、arm64)
 3. 执行`chmod +x xx; ./xx install` 安装
 4. 可以使用 `xx` 命令了
 5. 更新使用 `xx update` 命令
 6. 使用 `xx h` 获取帮助, `xx zh` 获取中文帮助
 
 > 国内用户可尝试使用以下加速链接：  
-> `wget https://gh.wget.cool/https:/raw.githubusercontent.com/iuv/xx/master/build/mac/xx`   
-> `wget https://gh.wget.cool/https:/raw.githubusercontent.com/iuv/xx/master/build/linux/xx`   
-> `wget https://cdn.jsdelivr.net/gh/iuv/xx@master/build/mac/xx`  
-> `wget https://cdn.jsdelivr.net/gh/iuv/xx@master/build/linux/xx`
+> `wget https://gh.wget.cool/https:/raw.githubusercontent.com/iuv/xx/master/build/mac/x86/xx`   
+> `wget https://gh.wget.cool/https:/raw.githubusercontent.com/iuv/xx/master/build/linux/x86/xx`   
+> `wget https://cdn.jsdelivr.net/gh/iuv/xx@master/build/mac/x86/xx`  
+> `wget https://cdn.jsdelivr.net/gh/iuv/xx@master/build/linux/x86/xx`
 
 ## 使用示例
 ![demo](https://raw.githubusercontent.com/iuv/xx/master/demo.gif?sanitize=true)

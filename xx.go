@@ -55,16 +55,21 @@ func install() {
 
 // 更新
 func update() {
-	ret := base.Exec("curl https://jianpage.com/xx/")
+	ret := base.Exec("curl https://blog.jisuye.com/xx/")
 	if strings.Index(ret, base.Version) > 0 {
 		fmt.Println("The " + base.Version + " is already the latest version")
 		return
 	}
 	sys := base.Sys()
+	cpu := base.Cpu()
+	if cpu == "" {
+		fmt.Println("Error! Don't get the cpu model.")
+		return
+	}
 	if sys == "mac" {
-		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx")
+		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/" + cpu + "/xx")
 	} else if sys == "linux" {
-		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx")
+		base.Run("wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/" + cpu + "/xx")
 	}
 	base.Execp("chmod 775 xx")
 	base.Execp("./xx install")

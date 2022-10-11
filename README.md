@@ -1,6 +1,6 @@
 [中文说明](https://github.com/iuv/xx/blob/master/README_ZH.md)
 
-# xx simplified command tool v1.3.8
+# xx simplified command tool v1.3.9
 ![License](https://img.shields.io/badge/license-MIT-4EB1BA)
 [![wiki](https://img.shields.io/badge/Document-Wiki-green)](http://blog.jisuye.com/xx)
 
@@ -14,8 +14,8 @@ If you need to compile it yourself, you can clone this repository and run the bu
 ## demo
 ![demo](https://raw.githubusercontent.com/iuv/xx/master/demo.gif?sanitize=true)
 ## installation method
-1. Mac use `wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/xx` to download xx file
-2. linux uses `wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/xx` to download xx file
+1. Mac use `wget https://raw.githubusercontent.com/iuv/xx/master/build/mac/x86/xx` to download xx file(x86/arm64)
+2. linux uses `wget https://raw.githubusercontent.com/iuv/xx/master/build/linux/x86/xx` to download xx file(x86/arm/arm64)
 3. Execute `chmod +x xx; ./xx install` to install
 4. You can use the `xx` command
 5. Update using `xx update` command
