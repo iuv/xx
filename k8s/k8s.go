@@ -31,20 +31,24 @@ func K8s(cmd, a1, a2, a3, a4 string) {
 		getResource("secret", a1, a2)
 	case "ss", "statefulset":
 		getResource("statefulset", a1, a2)
+	case "cr":
+		getResource(a1, a2, a3)
 	case "pd", "podd":
-		resourceDescribe("pod", a1, a2)
+		resourceDescribe("pod", a1, a2, a3)
 	case "dd", "deploymentd":
-		resourceDescribe("deployment", a1, a2)
+		resourceDescribe("deployment", a1, a2, a3)
 	case "id", "ingressd":
-		resourceDescribe("ingress", a1, a2)
+		resourceDescribe("ingress", a1, a2, a3)
 	case "sd", "serviced":
-		resourceDescribe("service", a1, a2)
+		resourceDescribe("service", a1, a2, a3)
 	case "cd", "configmapd":
-		resourceDescribe("configmap", a1, a2)
+		resourceDescribe("configmap", a1, a2, a3)
 	case "secd", "secretd":
-		resourceDescribe("secret", a1, a2)
+		resourceDescribe("secret", a1, a2, a3)
 	case "ssd", "statefulsetd":
-		resourceDescribe("statefulset", a1, a2)
+		resourceDescribe("statefulset", a1, a2, a3)
+	case "crd":
+		resourceDescribe(a1, a2, a3, a4)
 	case "py", "pody":
 		resourceYaml("pod", a1, a2, a3)
 	case "dy", "deploymenty":
@@ -59,6 +63,8 @@ func K8s(cmd, a1, a2, a3, a4 string) {
 		resourceYaml("secret", a1, a2, a3)
 	case "ssy", "statefulsety":
 		resourceYaml("statefulset", a1, a2, a3)
+	case "cry":
+		resourceYaml(a1, a2, a3, a4)
 	case "pdel", "poddel":
 		resourceDel("pod", a1, a2)
 	case "ddel", "deploymentdel":
@@ -71,6 +77,8 @@ func K8s(cmd, a1, a2, a3, a4 string) {
 		resourceDel("secret", a1, a2)
 	case "ssdel", "statefulsetdel":
 		resourceDel("statefulset", a1, a2)
+	case "crdel":
+		resourceDel(a1, a2, a3)
 	case "pe", "pode":
 		resourceEdit("pod", a1, a2)
 	case "de", "deploymente":
@@ -85,6 +93,8 @@ func K8s(cmd, a1, a2, a3, a4 string) {
 		resourceEdit("secret", a1, a2)
 	case "sse", "statefulsete":
 		resourceEdit("statefulset", a1, a2)
+	case "cre":
+		resourceEdit(a1, a2, a3)
 	case "a", "apply":
 		apply(a1)
 	case "copy":
@@ -143,10 +153,14 @@ func resourceYaml(res, key, namespace, file string) {
 }
 
 // 查询资源详情基本方法
-func resourceDescribe(res, key, namespace string) {
+func resourceDescribe(res, key, namespace, grepKey string) {
 	key, namespace = getResAndNamespace(res, key, namespace)
 	if key != "" {
-		ret := base.Execp("kubectl describe " + res + " " + key + " -n " + namespace)
+		cmd := "kubectl describe " + res + " " + key + " -n " + namespace
+		ret := base.Execp(cmd)
+		if grepKey != "" {
+			ret = base.FindByKey(ret, grepKey)
+		}
 		fmt.Print(ret)
 	}
 }
